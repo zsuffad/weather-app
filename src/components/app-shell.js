@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import './basic-weather-widget.js';
+import {BasicWeatherWidget} from './basic-weather-widget.js';
 
 export class AppShell extends LitElement {
 
@@ -11,7 +11,9 @@ export class AppShell extends LitElement {
 }
 
 
-  static styles = css`
+static get styles() {
+  // language=css
+  return css`
     :host {
       display: block;
       padding: 16px;
@@ -31,6 +33,7 @@ export class AppShell extends LitElement {
       border-radius: 8px;
     }
   `;
+}
 
 
   async connectedCallback() {

@@ -4,13 +4,19 @@ import { LitElement, html, css } from 'lit';
  * BasicWeatherWidget component for displaying current weather information
  */
 export class BasicWeatherWidget extends LitElement {
-  static properties = {
-    temperature: { type: Number },
-    weatherCode: { type: Number },
-    loading: { type: Boolean }
-  };
 
-  static styles = css`
+  static get properties() {
+    return {
+        ...super.properties,
+        temperature: { type: Number },
+        weatherCode: { type: Number },
+        loading: { type: Boolean }
+    };
+}
+
+static get styles() {
+  // language=css
+  return css`
     :host {
       display: block;
       padding: 16px;
@@ -43,7 +49,8 @@ export class BasicWeatherWidget extends LitElement {
       font-style: italic;
       color: #999;
     }
-  `;
+    `;
+  }
 
   constructor() {
     super();

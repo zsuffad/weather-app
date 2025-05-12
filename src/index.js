@@ -32,15 +32,15 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-function registerServiceWorker() {
-  navigator.serviceWorker.register('/service-worker.js')
-    .then(registration => {
-      console.log('SW registered: ', registration);
-    })
-    .catch(registrationError => {
-      console.log('SW registration failed: ', registrationError);
-    });
-}
+// function registerServiceWorker() {
+//   navigator.serviceWorker.register('/service-worker.js')
+//     .then(registration => {
+//       console.log('SW registered: ', registration);
+//     })
+//     .catch(registrationError => {
+//       console.log('SW registration failed: ', registrationError);
+//     });
+// }
 
 // Add install prompt
 let deferredPrompt;
