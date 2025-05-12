@@ -6,29 +6,49 @@ import ApexCharts from 'apexcharts';
  * DailyForecastWidget component for displaying daily weather forecast
  */
 export class DailyForecastWidget extends WeatherLitElement {
+
     static get properties() {
         return {
             ...super.properties,
 
             loading: {type: Boolean},
-
+            forecastData: {type: Array},
         };
     }
 
-    static get styles() {
-        // language=css
-        return css`
-        `;
+    constructor() {
+        super();
+        this.loading = false;
+        this.forecastData = [];
+    }
+
+    async update(changedProperties) {
+        console.log('changedProperties', changedProperties);
+        if (changedProperties.has('forecastData')) {
+            if (this.forecastData && this.forecastData.length > 0) {
+                this.loading = false;
+                this.renderForecastChart();
+            }
+
+            this.updateComplete.then(async () => {
+
+            });
+        }
     }
 
     firstUpdated() {
-        this.renderForecastChart();
+        requestAnimationFrame(() => {
+            this.renderForecastChart();
+        });
     }
 
     renderForecastChart() {
         var options = {
             chart: {
               type: 'line'
+            },
+            stroke: {
+                curve: 'smooth',
             },
             series: [
               {
@@ -39,17 +59,20 @@ export class DailyForecastWidget extends WeatherLitElement {
             xaxis: {
               categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
             }
-          }
+          };
 
           const dailyForecastElement = this._('#daily-forecast-chart');
+          if (dailyForecastElement) {
+            var chart = new ApexCharts(dailyForecastElement, options);
+            chart.render();
+          }
 
-          var chart = new ApexCharts(dailyForecastElement, options)
-          chart.render()
     }
 
-    constructor() {
-        super();
-        this.loading = false;
+    static get styles() {
+        // language=css
+        return css`
+        `;
     }
 
     render() {

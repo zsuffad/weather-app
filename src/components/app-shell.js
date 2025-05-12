@@ -4,6 +4,23 @@ import {BasicWeatherWidget} from './basic-weather-widget.js';
 import {DailyForecastWidget} from './daily-forecast-widget.js';
 
 export class AppShell extends WeatherLitElement {
+
+    static get properties() {
+        return {
+            ...super.properties,
+
+            loading: {type: Boolean},
+            weatherData: {type: Object},
+            dailyForecastData: {type: Array},
+        };
+    }
+
+    constructor() {
+        super();
+        this.dailyForecastData = [];
+        this.weatherData = {};
+    }
+
     static get scopedElements() {
         return {
             'basic-weather-widget': BasicWeatherWidget,
@@ -37,37 +54,73 @@ export class AppShell extends WeatherLitElement {
 
     async connectedCallback() {
         super.connectedCallback();
+    }
+
+    async firstUpdated() {
+        this.fetchAndUpdateWeather();
+    }
+
+    async fetchAndUpdateWeather() {
         const weatherData = await this.fetchWeatherData();
 
         if (weatherData) {
-            // Update basic weather widget
-            const weatherWidget = /** @type {BasicWeatherWidget} */ (this.shadowRoot.querySelector('basic-weather-widget'));
-            if (weatherWidget) {
-                weatherWidget.temperature = weatherData.current_weather.temperature;
-                weatherWidget.temperatureUnit = weatherData.current_weather_units.temperature;
-                weatherWidget.windSpeed = weatherData.current_weather.windspeed;
-                weatherWidget.windSpeedUnit = weatherData.current_weather_units.windspeed;
-                weatherWidget.weatherCode = weatherData.current_weather.weathercode;
-                weatherWidget.loading = false;
-            }
+            console.log('weatherData', weatherData);
+            this.weatherData = weatherData;
 
-            // Update daily forecast widget
-            const forecastWidget = /** @type {DailyForecastWidget} */ (this.shadowRoot.querySelector('daily-forecast-widget'));
-            if (forecastWidget && weatherData.daily) {
-                const dailyData = [];
-                for (let i = 0; i < weatherData.daily.time.length; i++) {
-                    dailyData.push({
-                        date: weatherData.daily.time[i],
-                        tempMax: weatherData.daily.temperature_2m_max[i],
-                        tempMin: weatherData.daily.temperature_2m_min[i],
-                        weathercode: weatherData.daily.weathercode[i]
-                    });
+            // Use requestAnimationFrame to ensure DOM is fully rendered
+            requestAnimationFrame(() => {
+                // Update basic weather widget
+                const weatherWidget = /** @type {BasicWeatherWidget} */ (this.shadowRoot.querySelector('basic-weather-widget'));
+                if (weatherWidget) {
+                    weatherWidget.temperature = weatherData.current_weather.temperature;
+                    weatherWidget.temperatureUnit = weatherData.current_weather_units.temperature;
+                    weatherWidget.windSpeed = weatherData.current_weather.windspeed;
+                    weatherWidget.windSpeedUnit = weatherData.current_weather_units.windspeed;
+                    weatherWidget.weatherCode = weatherData.current_weather.weathercode;
+                    weatherWidget.loading = false;
+                } else {
+                    console.error('Basic weather widget not found in the shadow DOM');
                 }
-                forecastWidget.forecastData = dailyData;
-                forecastWidget.loading = false;
-            }
+
+                // Update daily forecast widget
+                const forecastWidget = /** @type {DailyForecastWidget} */ (this.shadowRoot.querySelector('daily-forecast-widget'));
+                if (forecastWidget && weatherData.daily) {
+                    const dailyData = [];
+                    for (let i = 0; i < weatherData.daily.time.length; i++) {
+                        dailyData.push({
+                            date: weatherData.daily.time[i],
+                            tempMax: weatherData.daily.temperature_2m_max[i],
+                            tempMin: weatherData.daily.temperature_2m_min[i],
+                            weathercode: weatherData.daily.weathercode[i]
+                        });
+                    }
+                    // this.dailyForecastData = dailyData;
+                    this.dailyForecastData = [...dailyData];
+                    console.log('this.dailyForecastData', this.dailyForecastData);
+
+                    // Optional: Directly set the forecast data on the widget
+                    const forecastWidget = /** @type {DailyForecastWidget} */ (this.shadowRoot.querySelector('daily-forecast-widget'));
+                    if (forecastWidget) {
+                        forecastWidget.forecastData = this.dailyForecastData;
+                    } else {
+                        console.error('Daily forecast widget not found in the shadow DOM');
+                    }
+                } else {
+                    console.error('Daily forecast widget not found in the shadow DOM');
+                }
+            });
         }
     }
+
+    // async update(changedProperties) {
+    //     console.log('changedProperties', changedProperties);
+    //     if (changedProperties.has('weatherData')) {
+    //         console.log('[update] this.weatherData', this.weatherData);
+    //     }
+    //     if (changedProperties.has('dailyForecastData')) {
+    //         console.log('[update] this.dailyForecastData', this.dailyForecastData);
+    //     }
+    // }
 
     async fetchWeatherData() {
         const latitude = 47.0707; // Graz
@@ -96,7 +149,8 @@ export class AppShell extends WeatherLitElement {
                     id="basic-weather-widget"></basic-weather-widget>
                 <daily-forecast-widget
                     class="daily-forecast-widget"
-                    id="daily-forecast-widget"></daily-forecast-widget>
+                    id="daily-forecast-widget"
+                    .forecastData=${this.dailyForecastData}></daily-forecast-widget>
             </main>
         `;
     }
