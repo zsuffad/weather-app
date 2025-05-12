@@ -1,15 +1,23 @@
-import {LitElement, html, css} from 'lit';
+import {html, css} from 'lit';
+import WeatherLitElement from './weather-lit-element';
 
 /**
  * BasicWeatherWidget component for displaying current weather information
  */
-export class BasicWeatherWidget extends LitElement {
+export class BasicWeatherWidget extends WeatherLitElement {
     static get properties() {
         return {
             ...super.properties,
-            temperature: {type: Number},
-            weatherCode: {type: Number},
+
             loading: {type: Boolean},
+
+            temperature: {type: Number},
+            temperatureUnit: {type: String},
+
+            windSpeed: {type: Number},
+            windSpeedUnit: {type: String},
+
+            weatherCode: {type: Number},
         };
     }
 
@@ -53,9 +61,15 @@ export class BasicWeatherWidget extends LitElement {
 
     constructor() {
         super();
-        this.temperature = null;
-        this.weatherCode = null;
         this.loading = true;
+
+        this.temperature = null;
+        this.temperatureUnit = null;
+
+        this.windSpeed = null;
+        this.windSpeedUnit = null;
+
+        this.weatherCode = null;
     }
 
     /**
@@ -126,7 +140,8 @@ export class BasicWeatherWidget extends LitElement {
             <div class="weather-container">
                 <div class="weather-icon">${this.getWeatherIcon()}</div>
                 <div class="weather-info">
-                    <p class="temperature">${this.temperature}°C</p>
+                    <p class="temperature">${this.temperature} ${this.temperatureUnit}</p>
+                    <p class="windspeed">${this.windSpeed} ${this.windSpeedUnit}</p>
                     <p class="description">${this.getWeatherDescription()}</p>
                 </div>
             </div>

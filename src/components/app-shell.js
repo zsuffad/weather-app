@@ -1,10 +1,13 @@
-import {LitElement, html, css} from 'lit';
+import {html, css} from 'lit';
+import WeatherLitElement from './weather-lit-element';
 import {BasicWeatherWidget} from './basic-weather-widget.js';
+import {DailyForecastWidget} from './daily-forecast-widget.js';
 
-export class AppShell extends LitElement {
+export class AppShell extends WeatherLitElement {
     static get scopedElements() {
         return {
             'basic-weather-widget': BasicWeatherWidget,
+            'daily-forecast-widget': DailyForecastWidget,
         };
     }
 
@@ -34,25 +37,43 @@ export class AppShell extends LitElement {
 
     async connectedCallback() {
         super.connectedCallback();
-        const basicWeatherData = await this.fetchBasicWeatherData();
+        const weatherData = await this.fetchWeatherData();
 
-        console.log('Current Weather:', basicWeatherData);
-
-        if (basicWeatherData) {
-            const weatherWidget = this.shadowRoot.querySelector('basic-weather-widget');
+        if (weatherData) {
+            // Update basic weather widget
+            const weatherWidget = /** @type {BasicWeatherWidget} */ (this.shadowRoot.querySelector('basic-weather-widget'));
             if (weatherWidget) {
-                weatherWidget.temperature = basicWeatherData.current_weather.temperature;
-                weatherWidget.weatherCode = basicWeatherData.current_weather.weathercode;
+                weatherWidget.temperature = weatherData.current_weather.temperature;
+                weatherWidget.temperatureUnit = weatherData.current_weather_units.temperature;
+                weatherWidget.windSpeed = weatherData.current_weather.windspeed;
+                weatherWidget.windSpeedUnit = weatherData.current_weather_units.windspeed;
+                weatherWidget.weatherCode = weatherData.current_weather.weathercode;
                 weatherWidget.loading = false;
+            }
+
+            // Update daily forecast widget
+            const forecastWidget = /** @type {DailyForecastWidget} */ (this.shadowRoot.querySelector('daily-forecast-widget'));
+            if (forecastWidget && weatherData.daily) {
+                const dailyData = [];
+                for (let i = 0; i < weatherData.daily.time.length; i++) {
+                    dailyData.push({
+                        date: weatherData.daily.time[i],
+                        tempMax: weatherData.daily.temperature_2m_max[i],
+                        tempMin: weatherData.daily.temperature_2m_min[i],
+                        weathercode: weatherData.daily.weathercode[i]
+                    });
+                }
+                forecastWidget.forecastData = dailyData;
+                forecastWidget.loading = false;
             }
         }
     }
 
-    async fetchBasicWeatherData() {
+    async fetchWeatherData() {
         const latitude = 47.0707; // Graz
         const longitude = 15.4395;
 
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode&current_weather=true`;
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto`;
 
         try {
             const response = await fetch(url);
@@ -70,7 +91,12 @@ export class AppShell extends LitElement {
             </header>
             <main>
                 <p>Current weather conditions:</p>
-                <basic-weather-widget></basic-weather-widget>
+                <basic-weather-widget
+                    class="basic-weather-widget"
+                    id="basic-weather-widget"></basic-weather-widget>
+                <daily-forecast-widget
+                    class="daily-forecast-widget"
+                    id="daily-forecast-widget"></daily-forecast-widget>
             </main>
         `;
     }
