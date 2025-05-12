@@ -4,8 +4,7 @@ import './components/app-shell.js';
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
         // Check if in development mode
-        const isDevelopment =
-            window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
         if (isDevelopment) {
             try {
@@ -16,9 +15,7 @@ if ('serviceWorker' in navigator) {
                     console.log('Previous service worker unregistered');
                 }
 
-                console.log(
-                    'Development mode detected, service worker will run with caching disabled',
-                );
+                console.log('Development mode detected, service worker will run with caching disabled');
             } catch (error) {
                 console.error('Error handling service worker in development:', error);
             }

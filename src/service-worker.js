@@ -4,8 +4,7 @@ import {StaleWhileRevalidate, CacheFirst} from 'workbox-strategies';
 import {ExpirationPlugin} from 'workbox-expiration';
 
 // Check for development mode
-const isDevelopment =
-    self.location.hostname === 'localhost' || self.location.hostname === '127.0.0.1';
+const isDevelopment = self.location.hostname === 'localhost' || self.location.hostname === '127.0.0.1';
 
 // This single placeholder will be replaced by the Workbox injectManifest plugin
 // Just define it once and use it conditionally
