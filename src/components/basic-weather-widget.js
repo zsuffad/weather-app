@@ -21,44 +21,6 @@ export class BasicWeatherWidget extends WeatherLitElement {
         };
     }
 
-    static get styles() {
-        // language=css
-        return css`
-            :host {
-                display: block;
-                padding: 16px;
-                background-color: white;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-            .weather-container {
-                display: flex;
-                align-items: center;
-                gap: 16px;
-            }
-            .weather-icon {
-                font-size: 2.5rem;
-            }
-            .weather-info {
-                display: flex;
-                flex-direction: column;
-            }
-            .temperature {
-                font-size: 1.5rem;
-                font-weight: bold;
-                margin: 0;
-            }
-            .description {
-                margin: 4px 0 0;
-                color: #666;
-            }
-            .loading {
-                font-style: italic;
-                color: #999;
-            }
-        `;
-    }
-
     constructor() {
         super();
         this.loading = true;
@@ -127,6 +89,44 @@ export class BasicWeatherWidget extends WeatherLitElement {
             default:
                 return 'Unknown';
         }
+    }
+
+    static get styles() {
+        // language=css
+        return css`
+            :host {
+                display: block;
+                padding: 16px;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .weather-container {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+            .weather-icon {
+                font-size: 2.5rem;
+            }
+            .weather-info {
+                display: flex;
+                flex-direction: column;
+            }
+            .temperature {
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin: 0;
+            }
+            .description {
+                margin: 4px 0 0;
+                color: #666;
+            }
+            .loading {
+                font-style: italic;
+                color: #999;
+            }
+        `;
     }
 
     render() {
