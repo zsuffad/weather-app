@@ -23,23 +23,15 @@ if ('serviceWorker' in navigator) {
 
         // Always register the service worker, but its behavior differs based on environment
         try {
-            const registration = await navigator.serviceWorker.register('/service-worker.js');
+            const registration = await navigator.serviceWorker.register('/service-worker.js', {
+                type: 'module'
+            });
             console.log('SW registered: ', registration);
         } catch (error) {
             console.log('SW registration failed: ', error);
         }
     });
 }
-
-// function registerServiceWorker() {
-//   navigator.serviceWorker.register('/service-worker.js')
-//     .then(registration => {
-//       console.log('SW registered: ', registration);
-//     })
-//     .catch(registrationError => {
-//       console.log('SW registration failed: ', registrationError);
-//     });
-// }
 
 // Add install prompt
 let deferredPrompt;
