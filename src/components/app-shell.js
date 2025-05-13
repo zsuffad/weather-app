@@ -115,15 +115,17 @@ export class AppShell extends WeatherLitElement {
     // async update(changedProperties) {
     //     console.log('changedProperties', changedProperties);
     //     if (changedProperties.has('weatherData')) {
-    //         console.log('[update] this.weatherData', this.weatherData);
+    //         console.log('[APP-SHELL][update] this.weatherData', this.weatherData);
     //     }
     //     if (changedProperties.has('dailyForecastData')) {
-    //         console.log('[update] this.dailyForecastData', this.dailyForecastData);
+    //         console.log('[APP-SHELL][update] this.dailyForecastData', this.dailyForecastData);
     //     }
+    //     super.update(changedProperties);
     // }
 
     async fetchWeatherData() {
-        const latitude = 47.0707; // Graz
+        // Graz
+        const latitude = 47.0707;
         const longitude = 15.4395;
 
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto`;
