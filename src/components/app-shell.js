@@ -2,6 +2,7 @@ import {html, css} from 'lit';
 import WeatherLitElement from './weather-lit-element';
 import {BasicWeatherWidget} from './basic-weather-widget.js';
 import {DailyForecastWidget} from './daily-forecast-widget.js';
+import {WeeklyForecastWidget} from './weekly-forecast-widget.js';
 
 export class AppShell extends WeatherLitElement {
 
@@ -25,6 +26,7 @@ export class AppShell extends WeatherLitElement {
         return {
             'basic-weather-widget': BasicWeatherWidget,
             'daily-forecast-widget': DailyForecastWidget,
+            'weekly-forecast-widget': WeeklyForecastWidget,
         };
     }
 
@@ -66,62 +68,8 @@ export class AppShell extends WeatherLitElement {
         if (weatherData) {
             console.log('weatherData', weatherData);
             this.weatherData = weatherData;
-
-            // Use requestAnimationFrame to ensure DOM is fully rendered
-            requestAnimationFrame(() => {
-                // Update basic weather widget
-                const weatherWidget = /** @type {BasicWeatherWidget} */ (this.shadowRoot.querySelector('basic-weather-widget'));
-                if (weatherWidget) {
-                    weatherWidget.temperature = weatherData.current_weather.temperature;
-                    weatherWidget.temperatureUnit = weatherData.current_weather_units.temperature;
-                    weatherWidget.windSpeed = weatherData.current_weather.windspeed;
-                    weatherWidget.windSpeedUnit = weatherData.current_weather_units.windspeed;
-                    weatherWidget.weatherCode = weatherData.current_weather.weathercode;
-                    weatherWidget.loading = false;
-                } else {
-                    console.error('Basic weather widget not found in the shadow DOM');
-                }
-
-                // Update daily forecast widget
-                const forecastWidget = /** @type {DailyForecastWidget} */ (this.shadowRoot.querySelector('daily-forecast-widget'));
-                if (forecastWidget && weatherData.daily) {
-                    const dailyData = [];
-                    for (let i = 0; i < weatherData.daily.time.length; i++) {
-                        dailyData.push({
-                            date: weatherData.daily.time[i],
-                            tempMax: weatherData.daily.temperature_2m_max[i],
-                            tempMin: weatherData.daily.temperature_2m_min[i],
-                            weathercode: weatherData.daily.weathercode[i]
-                        });
-                    }
-                    // this.dailyForecastData = dailyData;
-                    this.dailyForecastData = [...dailyData];
-                    console.log('this.dailyForecastData', this.dailyForecastData);
-
-                    // Optional: Directly set the forecast data on the widget
-                    const forecastWidget = /** @type {DailyForecastWidget} */ (this.shadowRoot.querySelector('daily-forecast-widget'));
-                    if (forecastWidget) {
-                        forecastWidget.forecastData = this.dailyForecastData;
-                    } else {
-                        console.error('Daily forecast widget not found in the shadow DOM');
-                    }
-                } else {
-                    console.error('Daily forecast widget not found in the shadow DOM');
-                }
-            });
         }
     }
-
-    // async update(changedProperties) {
-    //     console.log('changedProperties', changedProperties);
-    //     if (changedProperties.has('weatherData')) {
-    //         console.log('[APP-SHELL][update] this.weatherData', this.weatherData);
-    //     }
-    //     if (changedProperties.has('dailyForecastData')) {
-    //         console.log('[APP-SHELL][update] this.dailyForecastData', this.dailyForecastData);
-    //     }
-    //     super.update(changedProperties);
-    // }
 
     async fetchWeatherData() {
         // Graz
@@ -145,14 +93,18 @@ export class AppShell extends WeatherLitElement {
                 <h1>Weather Graz</h1>
             </header>
             <main>
-                <p>Current weather conditions:</p>
                 <basic-weather-widget
                     class="basic-weather-widget"
-                    id="basic-weather-widget"></basic-weather-widget>
+                    id="basic-weather-widget"
+                    .weatherData=${this.weatherData}></basic-weather-widget>
                 <daily-forecast-widget
                     class="daily-forecast-widget"
                     id="daily-forecast-widget"
-                    .forecastData=${this.dailyForecastData}></daily-forecast-widget>
+                    .weatherData=${this.weatherData}></daily-forecast-widget>
+                <weekly-forecast-widget
+                    class="weekly-forecast-widget"
+                    id="weekly-forecast-widget"
+                    .weatherData=${this.weatherData}></weekly-forecast-widget>
             </main>
         `;
     }

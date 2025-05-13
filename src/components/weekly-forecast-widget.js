@@ -3,9 +3,9 @@ import WeatherLitElement from './weather-lit-element';
 import ApexCharts from 'apexcharts';
 
 /**
- * DailyForecastWidget component for displaying daily weather forecast
+ * WeeklyForecastWidget component for displaying daily weather forecast
  */
-export class DailyForecastWidget extends WeatherLitElement {
+export class WeeklyForecastWidget extends WeatherLitElement {
 
     static get properties() {
         return {
@@ -13,7 +13,7 @@ export class DailyForecastWidget extends WeatherLitElement {
 
             loading: {type: Boolean},
             weatherData: {type: Object},
-            dailyForecastData: {type: Array}
+            weeklyForecastData: {type: Array}
         };
     }
 
@@ -21,7 +21,7 @@ export class DailyForecastWidget extends WeatherLitElement {
         super();
         this.loading = false;
         this.weatherData = {};
-        this.dailyForecastData = [];
+        this.weeklyForecastData = [];
     }
 
     firstUpdated() {
@@ -32,19 +32,17 @@ export class DailyForecastWidget extends WeatherLitElement {
 
     updated(changedProperties) {
         if (changedProperties.has('weatherData') && this.weatherData && Object.keys(this.weatherData).length > 0) {
-            if (this.weatherData.hourly) {
-                const dailyData = [];
-                // Get one day data
-                for (let i = 0; i < 24; i+=3) {
-                    dailyData.push({
-                        time: this.weatherData.hourly.time[i],
-                        temp: this.weatherData.hourly.temperature_2m[i],
-                        weatherCode: this.weatherData.hourly.weathercode[i]
+            if (this.weatherData.daily) {
+                const weeklyData = [];
+                for (let i = 0; i < this.weatherData.daily.time.length; i++) {
+                    weeklyData.push({
+                        date: this.weatherData.daily.time[i],
+                        tempMax: this.weatherData.daily.temperature_2m_max[i],
+                        tempMin: this.weatherData.daily.temperature_2m_min[i],
+                        weathercode: this.weatherData.daily.weathercode[i]
                     });
                 }
-                this.dailyForecastData = [...dailyData];
-                console.log('this.dailyForecastData', this.dailyForecastData);
-
+                this.weeklyForecastData = [...weeklyData];
             }
             // Move chart rendering logic here for forecastData changes
             this.renderForecastChart();
@@ -53,20 +51,20 @@ export class DailyForecastWidget extends WeatherLitElement {
     }
 
     renderForecastChart() {
-        const chartElement = this._('#daily-forecast-chart');
+        const chartElement = this._('#weekly-forecast-chart');
         if (chartElement) {
             // Reset element
             while (chartElement.firstChild) {
                 chartElement.removeChild(chartElement.firstChild);
             }
 
-            let times = [];
-            let temp = [];
-            let weatherCode = [];
-            this.dailyForecastData.forEach((forecast) => {
-                times.push(new Date(forecast.time).getHours());
-                temp.push(Number(forecast.temp).toFixed(1));
-                weatherCode.push(this.getWeatherIcon(forecast.weatherCode));
+            let dates = [];
+            let tempMax = [];
+            let tempMin = [];
+            this.weeklyForecastData.forEach((forecast) => {
+                dates.push(new Date(forecast.date).toLocaleDateString('en-us', { day:"numeric", month:"short"}));
+                tempMax.push(Number(forecast.tempMax).toFixed(1));
+                tempMin.push(Number(forecast.tempMin).toFixed(1));
             });
 
             var options = {
@@ -85,8 +83,13 @@ export class DailyForecastWidget extends WeatherLitElement {
                 series: [
                     {
                         name: 'max',
-                        data: temp,
+                        data: tempMax,
                         color: "#EE0011",
+                    },
+                    {
+                        name: 'min',
+                        data: tempMin,
+                        color: "#1100EE",
                     }
                 ],
                 markers: {
@@ -119,7 +122,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                     }
                 },
                 xaxis: {
-                    categories: times
+                    categories: dates
                 },
                 yaxis: {
                     min: 0,
@@ -160,12 +163,12 @@ export class DailyForecastWidget extends WeatherLitElement {
         }
 
         return html`
-            <div id="daily-forecast-container">
-                <h2>Today</h2>
-                <div id="daily-forecast-chart"></div>
+            <div id="weekly-forecast-container">
+                <h2>Next 7 days</h2>
+                <div id="weekly-forecast-chart"></div>
             </div>
         `;
     }
 }
 
-customElements.define('daily-forecast-widget', DailyForecastWidget);
+customElements.define('weekly-forecast-widget', WeeklyForecastWidget);
