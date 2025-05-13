@@ -52,7 +52,9 @@ export default [
       // Copy static assets
       copy({
         targets: [
-          { src: 'public/**/*', dest: 'dist' },
+          { src: 'public/favicon', dest: 'dist' },
+          { src: 'public/font', dest: 'dist' },
+          { src: 'public/css', dest: 'dist' },
           { src: 'src/styles.css', dest: 'dist' },
           { src: 'src/index.html', dest: 'dist' },
         ]
