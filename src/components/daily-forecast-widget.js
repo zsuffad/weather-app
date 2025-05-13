@@ -6,14 +6,13 @@ import ApexCharts from 'apexcharts';
  * DailyForecastWidget component for displaying daily weather forecast
  */
 export class DailyForecastWidget extends WeatherLitElement {
-
     static get properties() {
         return {
             ...super.properties,
 
             loading: {type: Boolean},
             weatherData: {type: Object},
-            dailyForecastData: {type: Array}
+            dailyForecastData: {type: Array},
         };
     }
 
@@ -35,16 +34,15 @@ export class DailyForecastWidget extends WeatherLitElement {
             if (this.weatherData.hourly) {
                 const dailyData = [];
                 // Get one day data
-                for (let i = 0; i < 24; i+=3) {
+                for (let i = 0; i < 24; i += 3) {
                     dailyData.push({
                         time: this.weatherData.hourly.time[i],
                         temp: this.weatherData.hourly.temperature_2m[i],
-                        weatherCode: this.weatherData.hourly.weathercode[i]
+                        weatherCode: this.weatherData.hourly.weathercode[i],
                     });
                 }
                 this.dailyForecastData = [...dailyData];
                 console.log('this.dailyForecastData', this.dailyForecastData);
-
             }
             // Move chart rendering logic here for forecastData changes
             this.renderForecastChart();
@@ -77,7 +75,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                     },
                     zoom: {
                         enabled: false,
-                    }
+                    },
                 },
                 stroke: {
                     curve: 'smooth',
@@ -86,8 +84,8 @@ export class DailyForecastWidget extends WeatherLitElement {
                     {
                         name: 'max',
                         data: temp,
-                        color: "#EE0011",
-                    }
+                        color: '#EE0011',
+                    },
                 ],
                 markers: {
                     size: 6,
@@ -100,7 +98,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                 },
                 dataLabels: {
                     enabled: true,
-                    enabledOnSeries: [0,1],
+                    enabledOnSeries: [0, 1],
                     formatter: function (val, opts) {
                         return Math.round(val);
                     },
@@ -112,14 +110,14 @@ export class DailyForecastWidget extends WeatherLitElement {
                         fontSize: '16px',
                         fontFamily: 'Helvetica, Arial, sans-serif',
                         fontWeight: 'bold',
-                        colors: undefined
+                        colors: undefined,
                     },
                     background: {
                         enabled: false,
-                    }
+                    },
                 },
                 xaxis: {
-                    categories: times
+                    categories: times,
                 },
                 yaxis: {
                     min: 0,
@@ -132,24 +130,24 @@ export class DailyForecastWidget extends WeatherLitElement {
                             fontWeight: 400,
                             cssClass: 'apexcharts-yaxis-label',
                         },
-                        formatter: (value) => { return Number(value).toFixed(0); },
+                        formatter: (value) => {
+                            return Number(value).toFixed(0);
+                        },
                     },
                 },
                 tooltip: {
                     enabled: false,
-                }
+                },
             };
 
             var chart = new ApexCharts(chartElement, options);
             chart.render();
         }
-
     }
 
     static get styles() {
         // language=css
-        return css`
-        `;
+        return css``;
     }
 
     render() {

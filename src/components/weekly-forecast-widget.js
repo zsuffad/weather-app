@@ -6,14 +6,13 @@ import ApexCharts from 'apexcharts';
  * WeeklyForecastWidget component for displaying daily weather forecast
  */
 export class WeeklyForecastWidget extends WeatherLitElement {
-
     static get properties() {
         return {
             ...super.properties,
 
             loading: {type: Boolean},
             weatherData: {type: Object},
-            weeklyForecastData: {type: Array}
+            weeklyForecastData: {type: Array},
         };
     }
 
@@ -39,7 +38,7 @@ export class WeeklyForecastWidget extends WeatherLitElement {
                         date: this.weatherData.daily.time[i],
                         tempMax: this.weatherData.daily.temperature_2m_max[i],
                         tempMin: this.weatherData.daily.temperature_2m_min[i],
-                        weathercode: this.weatherData.daily.weathercode[i]
+                        weathercode: this.weatherData.daily.weathercode[i],
                     });
                 }
                 this.weeklyForecastData = [...weeklyData];
@@ -62,7 +61,7 @@ export class WeeklyForecastWidget extends WeatherLitElement {
             let tempMax = [];
             let tempMin = [];
             this.weeklyForecastData.forEach((forecast) => {
-                dates.push(new Date(forecast.date).toLocaleDateString('en-us', { day:"numeric", month:"short"}));
+                dates.push(new Date(forecast.date).toLocaleDateString('en-us', {day: 'numeric', month: 'short'}));
                 tempMax.push(Number(forecast.tempMax).toFixed(1));
                 tempMin.push(Number(forecast.tempMin).toFixed(1));
             });
@@ -75,7 +74,7 @@ export class WeeklyForecastWidget extends WeatherLitElement {
                     },
                     zoom: {
                         enabled: false,
-                    }
+                    },
                 },
                 stroke: {
                     curve: 'smooth',
@@ -84,13 +83,13 @@ export class WeeklyForecastWidget extends WeatherLitElement {
                     {
                         name: 'max',
                         data: tempMax,
-                        color: "#EE0011",
+                        color: '#EE0011',
                     },
                     {
                         name: 'min',
                         data: tempMin,
-                        color: "#1100EE",
-                    }
+                        color: '#1100EE',
+                    },
                 ],
                 markers: {
                     size: 6,
@@ -103,7 +102,7 @@ export class WeeklyForecastWidget extends WeatherLitElement {
                 },
                 dataLabels: {
                     enabled: true,
-                    enabledOnSeries: [0,1],
+                    enabledOnSeries: [0, 1],
                     formatter: function (val, opts) {
                         return Math.round(val);
                     },
@@ -115,14 +114,14 @@ export class WeeklyForecastWidget extends WeatherLitElement {
                         fontSize: '16px',
                         fontFamily: 'Helvetica, Arial, sans-serif',
                         fontWeight: 'bold',
-                        colors: undefined
+                        colors: undefined,
                     },
                     background: {
                         enabled: false,
-                    }
+                    },
                 },
                 xaxis: {
-                    categories: dates
+                    categories: dates,
                 },
                 yaxis: {
                     min: 0,
@@ -135,24 +134,24 @@ export class WeeklyForecastWidget extends WeatherLitElement {
                             fontWeight: 400,
                             cssClass: 'apexcharts-yaxis-label',
                         },
-                        formatter: (value) => { return Number(value).toFixed(0); },
+                        formatter: (value) => {
+                            return Number(value).toFixed(0);
+                        },
                     },
                 },
                 tooltip: {
                     enabled: false,
-                }
+                },
             };
 
             var chart = new ApexCharts(chartElement, options);
             chart.render();
         }
-
     }
 
     static get styles() {
         // language=css
-        return css`
-        `;
+        return css``;
     }
 
     render() {

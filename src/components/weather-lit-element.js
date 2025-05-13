@@ -1,5 +1,5 @@
 import {LitElement} from 'lit';
-import {weatherIconsStyles, weatherIconsWindStyles} from '../styles/icon-styles.js';
+// import {weatherIconsStyles, weatherIconsWindStyles} from '../styles/icon-styles.js';
 
 export default class WeatherLitElement extends LitElement {
     constructor() {
@@ -17,15 +17,11 @@ export default class WeatherLitElement extends LitElement {
     }
 
     _(selector) {
-        return this.shadowRoot === null
-            ? this.querySelector(selector)
-            : this.shadowRoot.querySelector(selector);
+        return this.shadowRoot === null ? this.querySelector(selector) : this.shadowRoot.querySelector(selector);
     }
 
     _a(selector) {
-        return this.shadowRoot === null
-            ? this.querySelectorAll(selector)
-            : this.shadowRoot.querySelectorAll(selector);
+        return this.shadowRoot === null ? this.querySelectorAll(selector) : this.shadowRoot.querySelectorAll(selector);
     }
 
     firstUpdated(_changedProperties) {

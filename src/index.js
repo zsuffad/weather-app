@@ -24,7 +24,7 @@ if ('serviceWorker' in navigator) {
         // Always register the service worker, but its behavior differs based on environment
         try {
             const registration = await navigator.serviceWorker.register('/service-worker.js', {
-                type: 'module'
+                type: 'module',
             });
             console.log('SW registered: ', registration);
         } catch (error) {

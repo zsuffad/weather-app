@@ -5,7 +5,6 @@ import {DailyForecastWidget} from './daily-forecast-widget.js';
 import {WeeklyForecastWidget} from './weekly-forecast-widget.js';
 
 export class AppShell extends WeatherLitElement {
-
     static get properties() {
         return {
             ...super.properties,

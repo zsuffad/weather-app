@@ -46,8 +46,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
         this.weatherCode = null;
     }
 
-    firstUpdated() {
-    }
+    firstUpdated() {}
 
     updated(changedProperties) {
         if (changedProperties.has('weatherData') && this.weatherData && Object.keys(this.weatherData).length > 0) {
@@ -139,7 +138,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
                     gap: 0;
                 }
                 .unit {
-                    color: rgba(123,123,123,.5);
+                    color: rgba(123, 123, 123, 0.5);
                 }
                 .description {
                     margin: 4px 0 0;
@@ -149,7 +148,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
                     font-style: italic;
                     color: #999;
                 }
-            `
+            `,
         ];
     }
 
@@ -170,11 +169,13 @@ export class BasicWeatherWidget extends WeatherLitElement {
             'towards-270-deg',
             'towards-293-deg',
             'towards-313-deg',
-            'towards-336-deg'
+            'towards-336-deg',
         ];
 
         const iconIndex = Math.round(direction / 22.5);
-        return html`<i class="wi wi-wind ${iconNames[iconIndex]}"></i>`;
+        return html`
+            <i class="wi wi-wind ${iconNames[iconIndex]}"></i>
+        `;
     }
 
     render() {
@@ -192,8 +193,8 @@ export class BasicWeatherWidget extends WeatherLitElement {
                         <span class="temperature-unit unit">${this.temperatureUnit}</span>
                     </div>
                     <div class="windspeed">
-                        ${this.windDirectionToIcon(this.windDirection)}
-                        ${this.windSpeed}<span class="windspeed-unit unit">${this.windSpeedUnit}</span>
+                        ${this.windDirectionToIcon(this.windDirection)} ${this.windSpeed}
+                        <span class="windspeed-unit unit">${this.windSpeedUnit}</span>
                     </div>
                 </div>
                 <div class="weather-overview">
