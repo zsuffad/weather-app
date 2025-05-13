@@ -85,6 +85,11 @@ export default [
     plugins: [
       nodeResolve(),
       commonjs(),
+      copy({
+        targets: [
+          { src: 'src/service-worker.js', dest: 'dist' }
+        ]
+      }),
       injectManifest({
         swSrc: 'src/service-worker.js',
         swDest: 'dist/service-worker.js',
