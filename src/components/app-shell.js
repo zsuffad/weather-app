@@ -108,6 +108,68 @@ export class AppShell extends WeatherLitElement {
           }
     }
 
+    async fetchGeocodingApi(event) {
+        console.log(event);
+        console.log(`e.target.value`, event.target.value);
+
+        try {
+            let cityCharacters = event.target.value;
+            const url = `https://geocoding-api.open-meteo.com/v1/search?name=${cityCharacters}&count=10&language=en&format=json`;
+            const options = {
+                method: 'GET'
+            };
+            const response = await fetch(url, options);
+            const geoData = await response.json();
+            console.log(`geoData`, geoData);
+            if (geoData.results && geoData.results.length > 0) {
+                let locationList = [];
+                geoData.results.forEach((location) => {
+                    console.log(`location`, location);
+                    locationList.push(html`
+                        <div class="location" @click="${(e) => {
+                                this.selectLocation(e);
+                            }}"
+                            data-longitude=${location.longitude}
+                            data-latitude=${location.latitude}
+                            data-city=${location.name}>
+                            ${location.name} [${location.country_code}]
+                        </div>
+                    `);
+                });
+                const resultsList = this._('.location-results');
+                resultsList.classList.add('enabled');
+                render(locationList, resultsList);
+            }
+        } catch(e) {
+            console.log('Geocoding API fetch failed: ', e);
+        }
+    }
+
+    selectLocation(event) {
+        console.log('event', event);
+        console.log('event.target', event.target);
+        console.log(event.target.dataset.latitude);
+        console.log(event.target.dataset.longitude);
+        console.log(event.target.dataset.city);
+
+        const resultsList = this._('.location-results');
+        resultsList.classList.remove('enabled');
+    }
+
+    renderSetCityWidget() {
+        return html`
+            <div class="add-city">
+                <input
+                    type="text"
+                    @input="${this.fetchGeocodingApi}"
+                    placeholder="Enter City Name"/>
+
+                <div class="location-results">
+                </div>
+            </div>
+        `;
+    }
+
     renderGetLocationButton() {
         return html`
             <div class="location-settings">
@@ -141,6 +203,22 @@ export class AppShell extends WeatherLitElement {
                 background-color: #f5f5f5;
                 border-radius: .25em;
             }
+            .location-results {
+                display: none;
+                background: white;
+                flex-direction: column;
+                gap: 5px;
+
+                &.enabled {
+                    display: flex;
+                }
+            }
+            .location {
+                padding: 9px;
+                &:hover {
+                    background: rgba(0,0,0,0.5);
+                }
+            }
         `;
     }
 
@@ -148,6 +226,7 @@ export class AppShell extends WeatherLitElement {
         return html`
             <header>
                 <h1>Graz</h1>
+                ${this.renderSetCityWidget()}
                 ${this.renderGetLocationButton()}
             </header>
             <main>
