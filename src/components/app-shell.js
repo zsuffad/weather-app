@@ -10,6 +10,8 @@ export class AppShell extends WeatherLitElement {
             ...super.properties,
 
             loading: {type: Boolean},
+            latitude: {type: Number},
+            longitude: {type: Number},
             weatherData: {type: Object},
             dailyForecastData: {type: Array},
         };
@@ -17,6 +19,9 @@ export class AppShell extends WeatherLitElement {
 
     constructor() {
         super();
+        this.latitude = JSON.parse(localStorage.getItem('latitude')) || -90;
+        this.longitude = JSON.parse(localStorage.getItem('longitude')) || -45;
+
         this.dailyForecastData = [];
         this.weatherData = {};
     }
@@ -29,32 +34,9 @@ export class AppShell extends WeatherLitElement {
         };
     }
 
-    static get styles() {
-        // language=css
-        return css`
-            :host {
-                display: block;
-                padding: 16px;
-                max-width: 800px;
-                margin: 0 auto;
-            }
-            header {
-                background-color: #f3f3f3;
-                color: black;
-                padding: 16px;
-                border-radius: 8px;
-                margin-bottom: 16px;
-            }
-            main {
-                padding: 16px;
-                background-color: #f5f5f5;
-                border-radius: 8px;
-            }
-        `;
-    }
-
     async connectedCallback() {
         super.connectedCallback();
+
         // Load font using FontFace API
     const font = new FontFace(
         'weathericons',
@@ -94,8 +76,8 @@ export class AppShell extends WeatherLitElement {
 
     async fetchWeatherData() {
         // Graz
-        const latitude = 47.0707;
-        const longitude = 15.4395;
+        const latitude = this.latitude;
+        const longitude = this.longitude;
 
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto`;
 
@@ -108,10 +90,65 @@ export class AppShell extends WeatherLitElement {
         }
     }
 
+    getLocation() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                console.log('latitude', position.coords.latitude, 'longitude', position.coords.longitude);
+                this.latitude = position.coords.latitude;
+                this.longitude = position.coords.longitude;
+                // Store data to localStorage
+                localStorage.setItem('latitude', JSON.stringify(this.latitude));
+                localStorage.setItem('longitude', JSON.stringify(this.longitude));
+
+                this.fetchAndUpdateWeather();
+            });
+          } else {
+            alert("Your browser doesn't support geolocation. Enter your location city manually");
+            return false;
+          }
+    }
+
+    renderGetLocationButton() {
+        return html`
+            <div class="location-settings">
+                <button @click="${this.getLocation}">Get Location</button>
+                ${this.latitude.toFixed(2)}
+                ${this.longitude.toFixed(2)}
+            </div>
+        `;
+    }
+
+    static get styles() {
+        // language=css
+        return css`
+            :host {
+                display: block;
+                padding: 1em;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            header {
+                background-color: #f3f3f3;
+                color: black;
+                padding: 1em;
+                border-radius: .25em;
+                margin-bottom: 1em;
+                display: flex;
+                justify-content: space-between;
+            }
+            main {
+                padding: 1em;
+                background-color: #f5f5f5;
+                border-radius: .25em;
+            }
+        `;
+    }
+
     render() {
         return html`
             <header>
-                <h1>Weather Graz</h1>
+                <h1>Graz</h1>
+                ${this.renderGetLocationButton()}
             </header>
             <main>
                 <basic-weather-widget
