@@ -68,7 +68,7 @@ export class WeeklyForecastWidget extends WeatherLitElement {
 
             var options = {
                 chart: {
-                    type: 'line',
+                    type: 'area',
                     toolbar: {
                         show: false,
                     },
@@ -91,6 +91,15 @@ export class WeeklyForecastWidget extends WeatherLitElement {
                         color: '#1100EE',
                     },
                 ],
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                      shadeIntensity: 1,
+                      opacityFrom: 0.7,
+                      opacityTo: 0.9,
+                      stops: [0, 90, 100]
+                    }
+                },
                 markers: {
                     size: 6,
                     colors: undefined,

@@ -67,6 +67,9 @@ export class DailyForecastWidget extends WeatherLitElement {
                 weatherCode.push(this.getWeatherIcon(forecast.weatherCode));
             });
 
+            const minTemp = Math.min(...temp);
+            const maxTemp = Math.max(...temp);
+
             var options = {
                 chart: {
                     type: 'line',
@@ -107,7 +110,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                     offsetX: 0,
                     offsetY: -6,
                     style: {
-                        fontSize: '16px',
+                        fontSize: '20px',
                         fontFamily: 'Helvetica, Arial, sans-serif',
                         fontWeight: 'bold',
                         colors: undefined,
@@ -118,10 +121,28 @@ export class DailyForecastWidget extends WeatherLitElement {
                 },
                 xaxis: {
                     categories: times,
+                    type: 'category',
+                    lines: {
+                        show: true
+                    },
+                    tickPlacement: 'between',
+                    labels: {
+                        style: {
+                            colors: [],
+                            fontSize: '18px',
+                            fontFamily: 'Helvetica, Arial, sans-serif',
+                            fontWeight: 400,
+                            cssClass: 'apexcharts-xaxis-label',
+                        },
+                        formatter: (value) => {
+                            return value  + 'h';
+                        },
+                    },
                 },
                 yaxis: {
-                    min: 0,
-                    max: 30,
+                    min: minTemp > 0 ? 0 : minTemp - 10,
+                    max: maxTemp + 10,
+                    stepSize: 10,
                     labels: {
                         style: {
                             colors: [],
@@ -138,6 +159,27 @@ export class DailyForecastWidget extends WeatherLitElement {
                 tooltip: {
                     enabled: false,
                 },
+                grid: {
+                    show: true,
+                    borderColor: '#fff',
+                    strokeDashArray: 0,
+                    position: 'back',
+                    yaxis: {
+                        lines: {
+                            show: true
+                        }
+                    },
+                    column: {
+                        colors: ['#FDFDFD', '#F1F1F1'],
+                        opacity: 1
+                    },
+                    padding: {
+                        top: 0,
+                        right: 10,
+                        bottom: 0,
+                        left: 10
+                    },
+                }
             };
 
             var chart = new ApexCharts(chartElement, options);
