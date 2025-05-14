@@ -50,23 +50,39 @@ export default class WeatherLitElement extends LitElement {
         // https://open-meteo.com/en/docs/weather-codes
         switch (true) {
             case weatherCode === 0:
-                return html`<i class="wi wi-day-sunny">`; // Clear sky
+                return html`
+                    <i class="wi wi-day-sunny"></i>
+                `; // Clear sky
             case weatherCode >= 1 && weatherCode <= 3:
-                return html`<i class="wi wi-day-cloudy">`; // Partly cloudy
+                return html`
+                    <i class="wi wi-day-cloudy"></i>
+                `; // Partly cloudy
             case weatherCode >= 45 && weatherCode <= 48:
-                return html`<i class="wi wi-day-fog">`; // Fog
+                return html`
+                    <i class="wi wi-day-fog"></i>
+                `; // Fog
             case weatherCode >= 51 && weatherCode <= 67:
-                return html`<i class="wi wi-day-rain">`; // Rain
+                return html`
+                    <i class="wi wi-day-rain"></i>
+                `; // Rain
             case weatherCode >= 71 && weatherCode <= 77:
-                return html`<i class="wi wi-day-snow">`; // Snow
+                return html`
+                    <i class="wi wi-day-snow"></i>
+                `; // Snow
             case weatherCode >= 80 && weatherCode <= 82:
-                return html`<i class="wi wi-day-showers">`; // Rain showers
+                return html`
+                    <i class="wi wi-day-showers"></i>
+                `; // Rain showers
             case weatherCode >= 85 && weatherCode <= 86:
                 return html`<i class="wi wi-day-snow>`; // Snow showers
             case weatherCode >= 95 && weatherCode <= 99:
-                return html`<i class="wi wi-day-thunderstorm">`; // Thunderstorm
+                return html`
+                    <i class="wi wi-day-thunderstorm"></i>
+                `; // Thunderstorm
             default:
-                return html`<i class="wi wi-day-cloudy">`; // Default
+                return html`
+                    <i class="wi wi-day-cloudy"></i>
+                `; // Default
         }
     }
 }

@@ -92,13 +92,13 @@ export class WeeklyForecastWidget extends WeatherLitElement {
                     },
                 ],
                 fill: {
-                    type: "gradient",
+                    type: 'gradient',
                     gradient: {
-                      shadeIntensity: 1,
-                      opacityFrom: 0.7,
-                      opacityTo: 0.9,
-                      stops: [0, 90, 100]
-                    }
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 0.9,
+                        stops: [0, 90, 100],
+                    },
                 },
                 markers: {
                     size: 6,

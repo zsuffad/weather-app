@@ -51,19 +51,18 @@ export class BasicWeatherWidget extends WeatherLitElement {
 
         // Check if the font is already available
         document.fonts.ready.then(() => {
-          this.fontLoaded = document.fonts.check('1em weathericons');
-          console.log('Font check in child:', this.fontLoaded);
-          this.requestUpdate();
+            this.fontLoaded = document.fonts.check('1em weathericons');
+            console.log('Font check in child:', this.fontLoaded);
+            this.requestUpdate();
         });
 
         // Listen for font-loaded event from parent
         this.addEventListener('font-loaded', (e) => {
-          console.log('Font loaded event received in child:', e.detail.fontFamily);
-          this.fontLoaded = true;
-          this.requestUpdate();
+            console.log('Font loaded event received in child:', e.detail.fontFamily);
+            this.fontLoaded = true;
+            this.requestUpdate();
         });
-      }
-
+    }
 
     firstUpdated() {}
 
@@ -81,7 +80,15 @@ export class BasicWeatherWidget extends WeatherLitElement {
             this.temperature = Math.round(this.weatherData.current_weather.temperature);
             this.temperatureUnit = this.weatherData.current_weather_units.temperature;
             this.windSpeed = Math.round(this.weatherData.current_weather.windspeed);
-            this.windSpeedUnit = this.weatherData.current_weather_units.windspeed === 'km/h' ? html`<div class="fraction-unit"><span class="top">km</span><span class="bottom">h</span></div>` : this.weatherData.current_weather_units.windspeed;
+            this.windSpeedUnit =
+                this.weatherData.current_weather_units.windspeed === 'km/h'
+                    ? html`
+                          <div class="fraction-unit">
+                              <span class="top">km</span>
+                              <span class="bottom">h</span>
+                          </div>
+                      `
+                    : this.weatherData.current_weather_units.windspeed;
             this.windDirection = this.weatherData.current_weather.winddirection;
             this.weatherCode = this.weatherData.current_weather.weathercode;
             this.loading = false;
@@ -140,7 +147,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    gap: .5rem;
+                    gap: 0.5rem;
                 }
                 .weather-icon {
                     font-size: 7rem;
@@ -193,10 +200,9 @@ export class BasicWeatherWidget extends WeatherLitElement {
                     align-items: center;
 
                     .top {
-                        border-bottom: 1px solid
+                        border-bottom: 1px solid;
                     }
                     .bottom {
-
                     }
                 }
                 .description {

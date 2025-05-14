@@ -123,7 +123,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                     categories: times,
                     type: 'category',
                     lines: {
-                        show: true
+                        show: true,
                     },
                     tickPlacement: 'between',
                     labels: {
@@ -135,7 +135,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                             cssClass: 'apexcharts-xaxis-label',
                         },
                         formatter: (value) => {
-                            return value  + 'h';
+                            return value + 'h';
                         },
                     },
                 },
@@ -166,20 +166,20 @@ export class DailyForecastWidget extends WeatherLitElement {
                     position: 'back',
                     yaxis: {
                         lines: {
-                            show: true
-                        }
+                            show: true,
+                        },
                     },
                     column: {
                         colors: ['#FDFDFD', '#F1F1F1'],
-                        opacity: 1
+                        opacity: 1,
                     },
                     padding: {
                         top: 0,
                         right: 10,
                         bottom: 0,
-                        left: 10
+                        left: 10,
                     },
-                }
+                },
             };
 
             var chart = new ApexCharts(chartElement, options);
