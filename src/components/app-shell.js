@@ -1,5 +1,6 @@
 import {html, css, render} from 'lit';
 // import {classMap} from 'lit/directives/class-map.js';
+import {commonStyles} from '../styles/common-styles';
 import WeatherLitElement from './weather-lit-element';
 import {BasicWeatherWidget} from './basic-weather-widget.js';
 import {DailyForecastWidget} from './daily-forecast-widget.js';
@@ -11,9 +12,8 @@ export class AppShell extends WeatherLitElement {
             ...super.properties,
 
             loading: {type: Boolean},
+            locationSettingsOpen: {type: Boolean},
             currentLocation: {type: Object},
-            latitude: {type: Number},
-            longitude: {type: Number},
             weatherData: {type: Object},
             dailyForecastData: {type: Array},
         };
@@ -31,6 +31,7 @@ export class AppShell extends WeatherLitElement {
 
         this.dailyForecastData = [];
         this.weatherData = {};
+        this.locationSettingsOpen = this.currentLocation.city ? false : true;
     }
 
     static get scopedElements() {
@@ -206,76 +207,115 @@ export class AppShell extends WeatherLitElement {
     renderGetLocationButton() {
         return html`
             <div class="location-settings">
-                <button @click="${this.getLocation}">Get Location</button>
-                ${this.currentLocation.latitude ? this.currentLocation.latitude.toFixed(2) : ''}
-                ${this.currentLocation.longitude ? this.currentLocation.longitude.toFixed(2) : ''}
+                <button @click="${this.getLocation}">GPS Location</button>
             </div>
         `;
     }
 
+    toggleSettings() {
+        this.locationSettingsOpen = this.locationSettingsOpen === true ? false : true;
+    }
+
     static get styles() {
         // language=css
-        return css`
-            :host {
-                display: block;
-                padding: 1em;
-                max-width: 800px;
-                margin: 0 auto;
-            }
-            header {
-                background-color: #f3f3f3;
-                color: black;
-                padding: 1em;
-                border-radius: 0.25em;
-                margin-bottom: 1em;
-                display: flex;
-                justify-content: space-between;
-            }
-            main {
-                padding: 1em;
-                background-color: #f5f5f5;
-                border-radius: 0.25em;
-            }
-            .location-results {
-                display: none;
-                background: white;
-                flex-direction: column;
-                gap: 5px;
-                cursor: pointer;
-
-                &.enabled {
+        return [
+            commonStyles,
+            css`
+                :host {
+                    display: block;
+                    padding: 1em;
+                    max-width: 800px;
+                    margin: 0 auto;
+                }
+                header {
+                    background-color: #f3f3f3;
+                    color: black;
+                    padding: 1em;
+                    border-radius: 0.25em;
+                    margin-bottom: 1em;
                     display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 1rem;
                 }
-            }
-            .location {
-                padding: 9px;
-                &:hover {
-                    background: rgba(0, 0, 0, 0.24);
+                .current-location {
+                    display: flex;
+                    gap: 1rem;
+                    align-items: baseline;
                 }
-            }
-            .current-location {
-                display: flex;
-                flex-direction: column;
-
-                h1 {
+                .current-city {
+                    font-size: 1.5rem;
+                    font-weight: bold;
                     margin: 0;
+                    align-items: baseline;
                 }
-            }
-        `;
+                main {
+                    padding: 1em;
+                    background-color: #f5f5f5;
+                    border-radius: 0.25em;
+                }
+                .location-results {
+                    display: none;
+                    background: white;
+                    flex-direction: column;
+                    gap: 5px;
+                    cursor: pointer;
+                    position: absolute;
+                    top: var(--input-height);
+
+                    &.enabled {
+                        display: flex;
+                    }
+                }
+                .location {
+                    padding: 9px;
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.24);
+                    }
+                }
+                .get-location-button {
+                    padding: 0.25rem 0;
+                }
+                .add-city {
+                    position: relative;
+                }
+                .city-search-input {
+                    height: var(--input-height);
+                    padding: 0.25rem;
+                }
+            `,
+        ];
     }
 
     render() {
         return html`
             <header>
-                <div class="current-location">
-                    <h1>${this.currentLocation.city}</h1>
-                    <div class="country">${this.currentLocation.country}</div>
-                    <div class="elevation">
-                        ${this.currentLocation.elevation}
-                        <span class="unit">m</span>
-                    </div>
-                </div>
-                ${this.renderSetCityWidget()} ${this.renderGetLocationButton()}
+                ${this.currentLocation.city
+                    ? html`
+                          <div class="current-location">
+                              <div class="current-city">${this.currentLocation.city}</div>
+                              <div class="current-country">${this.currentLocation.country}</div>
+                              <div class="current-elevation">
+                                  ${this.currentLocation.elevation}
+                                  <span class="unit">m</span>
+                              </div>
+                          </div>
+                          <div class="location-setings-button">
+                              <button @click=${this.toggleSettings}>
+                                  <span class="visually-hidden">Set your position</span>
+                                  <img src="/icons/location-sign-svgrepo-com.svg" alt="" width="48" />
+                              </button>
+                          </div>
+                          ${this.locationSettingsOpen
+                              ? html`
+                                    <div class="location-settings">
+                                        <div class="search-location">${this.renderSetCityWidget()}</div>
+                                        <div class="get-location-button">${this.renderGetLocationButton()}</div>
+                                    </div>
+                                `
+                              : ''}
+                      `
+                    : ''}
             </header>
             <main>
                 <basic-weather-widget

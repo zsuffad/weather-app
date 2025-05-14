@@ -1,6 +1,7 @@
 import {html, css} from 'lit';
 import WeatherLitElement from './weather-lit-element';
 import ApexCharts from 'apexcharts';
+import {commonStyles} from '../styles/common-styles';
 
 /**
  * WeeklyForecastWidget component for displaying daily weather forecast
@@ -35,9 +36,11 @@ export class WeeklyForecastWidget extends WeatherLitElement {
                 const weeklyData = [];
                 for (let i = 0; i < this.weatherData.daily.time.length; i++) {
                     weeklyData.push({
-                        date: this.weatherData.daily.time[i],
-                        tempMax: this.weatherData.daily.temperature_2m_max[i],
-                        tempMin: this.weatherData.daily.temperature_2m_min[i],
+                        date: new Date(this.weatherData.daily.time[i]).toLocaleDateString('en-us', {
+                            weekday: 'short',
+                        }),
+                        tempMax: Number(this.weatherData.daily.temperature_2m_max[i]).toFixed(1),
+                        tempMin: Number(this.weatherData.daily.temperature_2m_min[i]).toFixed(1),
                         weathercode: this.weatherData.daily.weathercode[i],
                     });
                 }
@@ -61,9 +64,10 @@ export class WeeklyForecastWidget extends WeatherLitElement {
             let tempMax = [];
             let tempMin = [];
             this.weeklyForecastData.forEach((forecast) => {
-                dates.push(new Date(forecast.date).toLocaleDateString('en-us', {day: 'numeric', month: 'short'}));
-                tempMax.push(Number(forecast.tempMax).toFixed(1));
-                tempMin.push(Number(forecast.tempMin).toFixed(1));
+                dates.push(forecast.date);
+                tempMax.push(forecast.tempMax);
+                tempMin.push(forecast.tempMin);
+                // weathercode
             });
 
             var options = {
@@ -160,7 +164,7 @@ export class WeeklyForecastWidget extends WeatherLitElement {
 
     static get styles() {
         // language=css
-        return css``;
+        return [commonStyles, css``];
     }
 
     render() {
@@ -172,7 +176,7 @@ export class WeeklyForecastWidget extends WeatherLitElement {
 
         return html`
             <div id="weekly-forecast-container">
-                <h2>Next 7 days</h2>
+                <span class="widget-title">Next 7 days</span>
                 <div id="weekly-forecast-chart"></div>
             </div>
         `;

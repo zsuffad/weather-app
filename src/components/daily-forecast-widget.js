@@ -1,6 +1,7 @@
 import {html, css} from 'lit';
 import WeatherLitElement from './weather-lit-element';
 import ApexCharts from 'apexcharts';
+import {commonStyles} from '../styles/common-styles';
 
 /**
  * DailyForecastWidget component for displaying daily weather forecast
@@ -182,6 +183,22 @@ export class DailyForecastWidget extends WeatherLitElement {
                 },
             };
 
+            const currentTime = new Date();
+            const currentHour = Number(currentTime.getHours());
+            const currentRow = Math.floor((currentHour / 24) * 8);
+
+            options.grid.column.colors = [
+                '#FDFDFD',
+                '#F1F1F1',
+                '#FDFDFD',
+                '#F1F1F1',
+                '#FDFDFD',
+                '#F1F1F1', //current
+                '#FDFDFD',
+                '#F1F1F1',
+            ];
+            options.grid.column.colors[currentRow] = '#CACACA';
+
             var chart = new ApexCharts(chartElement, options);
             chart.render();
         }
@@ -189,7 +206,7 @@ export class DailyForecastWidget extends WeatherLitElement {
 
     static get styles() {
         // language=css
-        return css``;
+        return [commonStyles, css``];
     }
 
     render() {
@@ -199,9 +216,14 @@ export class DailyForecastWidget extends WeatherLitElement {
             `;
         }
 
+        const currentTime = new Date();
+        const timeZone = this.weatherData.timezone;
+        const currentDate = currentTime.toLocaleString('at-DE', {timeZone: timeZone});
+
         return html`
             <div id="daily-forecast-container">
-                <h2>Today</h2>
+                <span class="widget-title">Today</span>
+                <span class="date-time">${currentDate}</span>
                 <div id="daily-forecast-chart"></div>
             </div>
         `;

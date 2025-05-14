@@ -1,6 +1,7 @@
 import {html, css, unsafeCSS} from 'lit';
 import WeatherLitElement from './weather-lit-element';
 import {weatherIconsStyles, weatherIconsWindStyles} from '../styles/icon-styles.js';
+import {commonStyles} from '../styles/common-styles';
 
 /**
  * BasicWeatherWidget component for displaying current weather information
@@ -128,6 +129,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
         return [
             unsafeCSS(weatherIconsStyles),
             unsafeCSS(weatherIconsWindStyles),
+            commonStyles,
             css`
                 :host {
                     display: block;
@@ -135,8 +137,6 @@ export class BasicWeatherWidget extends WeatherLitElement {
                     background-color: white;
                     border-radius: 8px;
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-                    --light-gray: rgba(123, 123, 123, 0.5);
                 }
                 .weather-container {
                     display: grid;
@@ -188,9 +188,6 @@ export class BasicWeatherWidget extends WeatherLitElement {
                         transform-origin: center;
                         height: 3rem;
                     }
-                }
-                .unit {
-                    color: var(--light-gray);
                 }
                 .fraction-unit {
                     display: flex;
