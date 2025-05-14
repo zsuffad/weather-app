@@ -1,4 +1,4 @@
-import {LitElement} from 'lit';
+import {html, LitElement} from 'lit';
 // import {weatherIconsStyles, weatherIconsWindStyles} from '../styles/icon-styles.js';
 
 export default class WeatherLitElement extends LitElement {
@@ -43,30 +43,30 @@ export default class WeatherLitElement extends LitElement {
 
     /**
      * Get weather icon based on weather code
-     * @returns {string} Weather icon character
+     * @returns {import('lit').TemplateResult} Weather icon character
      */
     getWeatherIcon(weatherCode) {
         // Simple mapping of weather codes to icons
         // https://open-meteo.com/en/docs/weather-codes
         switch (true) {
             case weatherCode === 0:
-                return '☀️'; // Clear sky
+                return html`<i class="wi wi-day-sunny">`; // Clear sky
             case weatherCode >= 1 && weatherCode <= 3:
-                return '🌤️'; // Partly cloudy
+                return html`<i class="wi wi-day-cloudy">`; // Partly cloudy
             case weatherCode >= 45 && weatherCode <= 48:
-                return '🌫️'; // Fog
+                return html`<i class="wi wi-day-fog">`; // Fog
             case weatherCode >= 51 && weatherCode <= 67:
-                return '🌧️'; // Rain
+                return html`<i class="wi wi-day-rain">`; // Rain
             case weatherCode >= 71 && weatherCode <= 77:
-                return '❄️'; // Snow
+                return html`<i class="wi wi-day-snow">`; // Snow
             case weatherCode >= 80 && weatherCode <= 82:
-                return '🌦️'; // Rain showers
+                return html`<i class="wi wi-day-showers">`; // Rain showers
             case weatherCode >= 85 && weatherCode <= 86:
-                return '🌨️'; // Snow showers
+                return html`<i class="wi wi-day-snow>`; // Snow showers
             case weatherCode >= 95 && weatherCode <= 99:
-                return '⛈️'; // Thunderstorm
+                return html`<i class="wi wi-day-thunderstorm">`; // Thunderstorm
             default:
-                return '🌡️'; // Default
+                return html`<i class="wi wi-day-cloudy">`; // Default
         }
     }
 }

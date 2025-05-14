@@ -1,4 +1,4 @@
-import {html, css} from 'lit';
+import {html, css, unsafeCSS} from 'lit';
 import WeatherLitElement from './weather-lit-element';
 import {weatherIconsStyles, weatherIconsWindStyles} from '../styles/icon-styles.js';
 
@@ -17,7 +17,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
             temperature: {type: Number},
             temperatureUnit: {type: String},
             windSpeed: {type: Number},
-            windSpeedUnit: {type: String},
+            windSpeedUnit: {type: Object},
             weatherCode: {type: Number},
         };
     }
@@ -39,12 +39,31 @@ export class BasicWeatherWidget extends WeatherLitElement {
         /** @type {number|null} */
         this.windSpeed = null;
 
-        /** @type {string|null} */
+        /** @type {string|import('lit').TemplateResult|null} */
         this.windSpeedUnit = null;
 
         /** @type {number|null} */
         this.weatherCode = null;
     }
+
+    connectedCallback() {
+        super.connectedCallback();
+
+        // Check if the font is already available
+        document.fonts.ready.then(() => {
+          this.fontLoaded = document.fonts.check('1em weathericons');
+          console.log('Font check in child:', this.fontLoaded);
+          this.requestUpdate();
+        });
+
+        // Listen for font-loaded event from parent
+        this.addEventListener('font-loaded', (e) => {
+          console.log('Font loaded event received in child:', e.detail.fontFamily);
+          this.fontLoaded = true;
+          this.requestUpdate();
+        });
+      }
+
 
     firstUpdated() {}
 
@@ -62,7 +81,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
             this.temperature = Math.round(this.weatherData.current_weather.temperature);
             this.temperatureUnit = this.weatherData.current_weather_units.temperature;
             this.windSpeed = Math.round(this.weatherData.current_weather.windspeed);
-            this.windSpeedUnit = this.weatherData.current_weather_units.windspeed;
+            this.windSpeedUnit = this.weatherData.current_weather_units.windspeed === 'km/h' ? html`<div class="fraction-unit"><span class="top">km</span><span class="bottom">h</span></div>` : this.weatherData.current_weather_units.windspeed;
             this.windDirection = this.weatherData.current_weather.winddirection;
             this.weatherCode = this.weatherData.current_weather.weathercode;
             this.loading = false;
@@ -99,10 +118,9 @@ export class BasicWeatherWidget extends WeatherLitElement {
 
     static get styles() {
         // language=css
-        console.log(weatherIconsStyles);
         return [
-            weatherIconsStyles,
-            weatherIconsWindStyles,
+            unsafeCSS(weatherIconsStyles),
+            unsafeCSS(weatherIconsWindStyles),
             css`
                 :host {
                     display: block;
@@ -110,11 +128,19 @@ export class BasicWeatherWidget extends WeatherLitElement {
                     background-color: white;
                     border-radius: 8px;
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+                    --light-gray: rgba(123, 123, 123, 0.5);
                 }
                 .weather-container {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: 16px;
+                }
+                .weather-overview {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: .5rem;
                 }
                 .weather-icon {
                     font-size: 7rem;
@@ -122,23 +148,56 @@ export class BasicWeatherWidget extends WeatherLitElement {
                 .weather-info {
                     display: flex;
                     flex-direction: column;
+                    gap: 1em;
                 }
                 .temperature {
                     font-size: 6rem;
+                    line-height: 5rem;
                     font-weight: bold;
                     margin: 0;
                     display: flex;
                     gap: 0;
+                    align-items: flex-start;
+
+                    .unit {
+                        line-height: 3rem;
+                        font-size: 2rem;
+                    }
                 }
                 .windspeed {
                     font-size: 3rem;
                     font-weight: bold;
                     margin: 0;
                     display: flex;
-                    gap: 0;
+                    align-items: center;
+                    gap: 10px;
+
+                    .unit {
+                        line-height: 3rem;
+                        font-size: 1rem;
+                    }
+
+                    .wi {
+                        transform-origin: center;
+                        height: 3rem;
+                    }
                 }
                 .unit {
-                    color: rgba(123, 123, 123, 0.5);
+                    color: var(--light-gray);
+                }
+                .fraction-unit {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0;
+                    line-height: 1em;
+                    align-items: center;
+
+                    .top {
+                        border-bottom: 1px solid
+                    }
+                    .bottom {
+
+                    }
                 }
                 .description {
                     margin: 4px 0 0;
@@ -193,8 +252,9 @@ export class BasicWeatherWidget extends WeatherLitElement {
                         <span class="temperature-unit unit">${this.temperatureUnit}</span>
                     </div>
                     <div class="windspeed">
-                        ${this.windDirectionToIcon(this.windDirection)} ${this.windSpeed}
+                        ${this.windSpeed}
                         <span class="windspeed-unit unit">${this.windSpeedUnit}</span>
+                        ${this.windDirectionToIcon(this.windDirection)}
                     </div>
                 </div>
                 <div class="weather-overview">

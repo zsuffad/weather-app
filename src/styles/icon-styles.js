@@ -2,7 +2,8 @@ import {css} from 'lit';
 
 // Get raw CSS content
 // You'll need to manually copy the CSS content from your icon library files
-export const weatherIconsStyles = css`
+// export const weatherIconsStyles = css`
+export const weatherIconsStyles = String.raw`
     /* Content from weather-icons.css */
     /*!
  *  Weather Icons 2.0.10
@@ -1849,7 +1850,8 @@ export const weatherIconsStyles = css`
     }
 `;
 
-export const weatherIconsWindStyles = css`
+// export const weatherIconsWindStyles = css`
+export const weatherIconsWindStyles = String.raw`
     /* Content from weather-icons-wind.css */
     @font-face {
         font-family: 'weathericons';

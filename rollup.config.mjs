@@ -21,7 +21,7 @@ export default [
       entryFileNames: production ? 'bundle-[hash].js' : 'bundle.js'
     },
     watch: {
-      include: ['src/**', 'src/components/**'],
+      include: ['src/*', 'src/**/*'],
       exclude: ['node_modules/**']
     },
     plugins: [
