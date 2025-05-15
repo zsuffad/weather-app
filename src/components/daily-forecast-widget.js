@@ -23,6 +23,7 @@ export class DailyForecastWidget extends WeatherLitElement {
         this.loading = false;
         this.weatherData = {};
         this.dailyForecastData = [];
+        this.todayPlusNDay = 0;
     }
 
     firstUpdated() {
@@ -35,7 +36,7 @@ export class DailyForecastWidget extends WeatherLitElement {
         if (changedProperties.has('weatherData') && this.weatherData && Object.keys(this.weatherData).length > 0) {
             if (this.weatherData.hourly) {
                 const dailyData = [];
-                // Get one day data
+                // Get one day data and get every 3 hour data
                 for (let i = 0; i < 24; i += 3) {
                     dailyData.push({
                         time: this.weatherData.hourly.time[i],
@@ -49,6 +50,45 @@ export class DailyForecastWidget extends WeatherLitElement {
             // Move chart rendering logic here for forecastData changes
             this.renderForecastChart();
             this.loading = false;
+        }
+    }
+
+    /**
+     * Set next 24H forcast data and rerender the chart
+     * @param {boolean} event go backward
+     */
+    setNextDay(event) {
+        console.log(`this.todayPlusNDay`, this.todayPlusNDay);
+        console.log('event', event.target);
+        const trigger = event.target;
+        const direction = trigger.getAttribute('data-direction');
+        // Set change direction
+        // @TODO don't increase todayPlusNDay if we are out of range.
+        direction === 'back' ? this.todayPlusNDay-- : this.todayPlusNDay++;
+
+        console.log('Set next day in daily forcast chart');
+        if (this.weatherData.hourly) {
+            const dailyData = [];
+            const lastIndex = this.weatherData.hourly.time.length;
+            this.todayPlusNDay = this.todayPlusNDay < 0 ? 0 : this.todayPlusNDay;
+            const from = this.todayPlusNDay * 24;
+            let to = this.todayPlusNDay * 24 + 24;
+            to = to > lastIndex ? lastIndex : to;
+            // Get one day data and get every 3 hour data
+            for (let i = from; i < to; i += 3) {
+                dailyData.push({
+                    time: this.weatherData.hourly.time[i],
+                    temp: this.weatherData.hourly.temperature_2m[i],
+                    weatherCode: this.weatherData.hourly.weathercode[i],
+                });
+            }
+            if (dailyData.length) {
+                this.dailyForecastData = [...dailyData];
+                console.log('this.dailyForecastData', this.dailyForecastData);
+                this.renderForecastChart();
+            } else {
+                console.log('No more data. Maybe go back');
+            }
         }
     }
 
@@ -184,6 +224,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                 },
             };
 
+            // @TODO only do this if we are not in the future
             const timeZone = this.weatherData.timezone;
             const timeZoneNow = new Date(
                 new Date().toLocaleString('en-US', {
@@ -193,6 +234,8 @@ export class DailyForecastWidget extends WeatherLitElement {
             const currentHour = Number(timeZoneNow.getHours());
             const currentRow = Math.floor((currentHour / 24) * 8);
 
+            // @TODO set day/night columns
+            // Accordingly like day/night icons 6-19h
             options.grid.column.colors = [
                 '#FDFDFD',
                 '#F1F1F1',
@@ -212,7 +255,32 @@ export class DailyForecastWidget extends WeatherLitElement {
 
     static get styles() {
         // language=css
-        return [commonStyles, css``];
+        return [
+            commonStyles,
+            css`
+                .daily-forecast-container {
+                    margin-top: 1rem;
+                }
+                .daily-forecast-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .head-end {
+                    display: flex;
+                }
+                .prev-day-forecast-button,
+                .next-day-forecast-button {
+                    cursor: pointer;
+                    display: block;
+                    border: 1px solid black;
+                    width: 30px;
+                    height: 30px;
+                    line-height: 30px;
+                    text-align: center;
+                }
+            `,
+        ];
     }
 
     render() {
@@ -227,9 +295,33 @@ export class DailyForecastWidget extends WeatherLitElement {
         const currentDate = currentTime.toLocaleString('at-DE', {timeZone: timeZone});
 
         return html`
-            <div id="daily-forecast-container">
-                <span class="widget-title">Today</span>
-                <span class="date-time">${currentDate}</span>
+            <div id="daily-forecast-container" class="daily-forecast-container">
+                <div class="daily-forecast-header">
+                    <div class="header-start">
+                        <!-- @TODO
+                            If not today hide currentDate and
+                            replace Today with dayName
+                        -->
+                        <span class="widget-title">Today</span>
+                        <span class="date-time">${currentDate}</span>
+                    </div>
+                    <div class="head-end">
+                        <span
+                            class="prev-day-forecast-button"
+                            title="Prev day"
+                            data-direction="back"
+                            @click=${this.setNextDay}>
+                            <
+                        </span>
+                        <span
+                            class="next-day-forecast-button"
+                            title="Next day"
+                            data-direction="forward"
+                            @click=${this.setNextDay}>
+                            >
+                        </span>
+                    </div>
+                </div>
                 <div id="daily-forecast-chart"></div>
             </div>
         `;

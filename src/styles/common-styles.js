@@ -25,7 +25,7 @@ export const commonStyles = css`
     .widget-title {
         font-size: 1.75rem;
         font-weight: bold;
-        margin: 1rem 0px 0;
+        margin: 0;
         display: inline-block;
     }
 
