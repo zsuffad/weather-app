@@ -3,6 +3,7 @@ import {
     clearDayIcon,
     clearNightIcon,
     cloudy1DayIcon,
+    cloudy1NightIcon,
     fogDayIcon,
     rainy1DayIcon,
     snowy1DayIcon,
@@ -15,11 +16,14 @@ import {
 export default class WeatherLitElement extends LitElement {
     constructor() {
         super();
+        this.weatherData = {};
     }
 
     static get properties() {
         return {
             ...super.properties,
+            currentLocation: {type: Object},
+            weatherData: {type: Object},
         };
     }
 
@@ -56,16 +60,21 @@ export default class WeatherLitElement extends LitElement {
      * Get weather icon based on weather code
      * @returns {import('lit').TemplateResult} Weather icon character
      */
-    getWeatherIcon(weatherCode, width = 128) {
+    getWeatherIcon(weatherCode) {
+
+        const timeZone = this.weatherData.timezone;
+        const timeZoneNow = new Date(new Date().toLocaleString('en-US', {
+            timeZone: timeZone
+        }));
+        const currentHour = Number(timeZoneNow.getHours());
+        const isDayTime = currentHour > 5 && currentHour < 19 ? true : false;
         // Simple mapping of weather codes to icons
         // https://open-meteo.com/en/docs/weather-codes
         switch (true) {
             case weatherCode === 0:
-                return clearDayIcon; // Clear sky
-                // If night?
-                // return clearNightIcon
+                return isDayTime ? clearDayIcon : clearNightIcon; // Clear sky
             case weatherCode >= 1 && weatherCode <= 3:
-                return cloudy1DayIcon; // Partly cloudy
+                return isDayTime ? cloudy1DayIcon : cloudy1NightIcon; // Partly cloudy
             case weatherCode >= 45 && weatherCode <= 48:
                 return fogDayIcon; // Fog
             case weatherCode >= 51 && weatherCode <= 67:

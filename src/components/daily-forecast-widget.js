@@ -13,6 +13,7 @@ export class DailyForecastWidget extends WeatherLitElement {
 
             loading: {type: Boolean},
             weatherData: {type: Object},
+            currentLocation: {type: Object},
             dailyForecastData: {type: Array},
         };
     }
@@ -183,8 +184,11 @@ export class DailyForecastWidget extends WeatherLitElement {
                 },
             };
 
-            const currentTime = new Date();
-            const currentHour = Number(currentTime.getHours());
+            const timeZone = this.weatherData.timezone;
+            const timeZoneNow = new Date(new Date().toLocaleString('en-US', {
+                timeZone: timeZone
+            }));
+            const currentHour = Number(timeZoneNow.getHours());
             const currentRow = Math.floor((currentHour / 24) * 8);
 
             options.grid.column.colors = [
@@ -193,7 +197,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                 '#FDFDFD',
                 '#F1F1F1',
                 '#FDFDFD',
-                '#F1F1F1', //current
+                '#F1F1F1',
                 '#FDFDFD',
                 '#F1F1F1',
             ];
