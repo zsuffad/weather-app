@@ -185,9 +185,11 @@ export class DailyForecastWidget extends WeatherLitElement {
             };
 
             const timeZone = this.weatherData.timezone;
-            const timeZoneNow = new Date(new Date().toLocaleString('en-US', {
-                timeZone: timeZone
-            }));
+            const timeZoneNow = new Date(
+                new Date().toLocaleString('en-US', {
+                    timeZone: timeZone,
+                }),
+            );
             const currentHour = Number(timeZoneNow.getHours());
             const currentRow = Math.floor((currentHour / 24) * 8);
 

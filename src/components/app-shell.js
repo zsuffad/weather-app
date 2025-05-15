@@ -291,47 +291,45 @@ export class AppShell extends WeatherLitElement {
             <header>
                 ${this.currentLocation.city
                     ? html`
-                        <div class="current-location">
-                            <div class="current-city">${this.currentLocation.city}</div>
-                            <div class="current-country">${this.currentLocation.country}</div>
-                            <div class="current-elevation">
-                                ${this.currentLocation.elevation}
-                                <span class="unit">m</span>
-                            </div>
-                        </div>
-                        <div class="location-setings-button">
-                            <button @click=${this.toggleSettings}>
-                                <span class="visually-hidden">Set your position</span>
-                                <img src="/icons/location-sign-svgrepo-com.svg" alt="" width="48" />
-                            </button>
-                        </div>
-                        ${this.locationSettingsOpen
-                            ? html`
-                                <div class="location-settings">
-                                    <div class="search-location">${this.renderSetCityWidget()}</div>
-                                    <div class="get-location-button">${this.renderGetLocationButton()}</div>
-                                </div>
-                            `
-                            : ''
-                        }
+                          <div class="current-location">
+                              <div class="current-city">${this.currentLocation.city}</div>
+                              <div class="current-country">${this.currentLocation.country}</div>
+                              <div class="current-elevation">
+                                  ${this.currentLocation.elevation}
+                                  <span class="unit">m</span>
+                              </div>
+                          </div>
+                          <div class="location-setings-button">
+                              <button @click=${this.toggleSettings}>
+                                  <span class="visually-hidden">Set your position</span>
+                                  <img src="/icons/location-sign-svgrepo-com.svg" alt="" width="48" />
+                              </button>
+                          </div>
+                          ${this.locationSettingsOpen
+                              ? html`
+                                    <div class="location-settings">
+                                        <div class="search-location">${this.renderSetCityWidget()}</div>
+                                        <div class="get-location-button">${this.renderGetLocationButton()}</div>
+                                    </div>
+                                `
+                              : ''}
                       `
                     : html`
-                        <div class="location-setings-button">
-                            <button @click=${this.toggleSettings}>
-                                <span class="visually-hidden">Set your position</span>
-                                <img src="/icons/location-sign-svgrepo-com.svg" alt="" width="48" />
-                            </button>
-                        </div>
-                        ${this.locationSettingsOpen
-                            ? html`
-                                <div class="location-settings">
-                                    <div class="search-location">${this.renderSetCityWidget()}</div>
-                                    <div class="get-location-button">${this.renderGetLocationButton()}</div>
-                                </div>
-                            `
-                            : ''
-                        }
-                    `}
+                          <div class="location-setings-button">
+                              <button @click=${this.toggleSettings}>
+                                  <span class="visually-hidden">Set your position</span>
+                                  <img src="/icons/location-sign-svgrepo-com.svg" alt="" width="48" />
+                              </button>
+                          </div>
+                          ${this.locationSettingsOpen
+                              ? html`
+                                    <div class="location-settings">
+                                        <div class="search-location">${this.renderSetCityWidget()}</div>
+                                        <div class="get-location-button">${this.renderGetLocationButton()}</div>
+                                    </div>
+                                `
+                              : ''}
+                      `}
             </header>
             <main>
                 <basic-weather-widget

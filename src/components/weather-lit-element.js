@@ -61,11 +61,12 @@ export default class WeatherLitElement extends LitElement {
      * @returns {import('lit').TemplateResult} Weather icon character
      */
     getWeatherIcon(weatherCode) {
-
         const timeZone = this.weatherData.timezone;
-        const timeZoneNow = new Date(new Date().toLocaleString('en-US', {
-            timeZone: timeZone
-        }));
+        const timeZoneNow = new Date(
+            new Date().toLocaleString('en-US', {
+                timeZone: timeZone,
+            }),
+        );
         const currentHour = Number(timeZoneNow.getHours());
         const isDayTime = currentHour > 5 && currentHour < 19 ? true : false;
         // Simple mapping of weather codes to icons
