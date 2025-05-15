@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 
 
 export const clearDayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 <defs>
   <filter id="blur" x="-.34167" y="-.34167" width="1.6833" height="1.85">
     <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -134,7 +134,7 @@ export const clearDayIcon = html`
 `;
 
 export const clearNightIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 56 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.3038" y="-.3318" width="1.6076" height="1.894">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -293,7 +293,7 @@ export const clearNightIcon = html`
 </svg>
 `;
 export const cloudy1DayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.28472" width="1.403" height="1.6944">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -471,7 +471,7 @@ export const cloudy1DayIcon = html`
 </svg>
 `;
 export const cloudy1NightIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.19471" y="-.26087" width="1.3744" height="1.6884">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -677,7 +677,7 @@ export const cloudy1NightIcon = html`
 </svg>
 `;
 export const cloudy2DayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.28472" width="1.403" height="1.6944">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -1061,7 +1061,7 @@ export const cloudy2NightIcon = html`
 </svg>
 `;
 export const cloudy3DayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.28472" width="1.403" height="1.6944">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -1239,7 +1239,7 @@ export const cloudy3DayIcon = html`
 </svg>
 `;
 export const cloudy3NightIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.19471" y="-.26087" width="1.3744" height="1.6884">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -1445,7 +1445,7 @@ export const cloudy3NightIcon = html`
 </svg>
 `;
 export const cloudyIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.24684" y="-.27097" width="1.4937" height="1.6939">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -1558,7 +1558,7 @@ export const cloudyIcon = html`
 </svg>
 `;
 export const dustIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.24684" y="-.27097" width="1.4937" height="1.6939">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -1589,7 +1589,7 @@ export const dustIcon = html`
 </svg>
 `;
 export const fogDayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -1833,7 +1833,7 @@ export const fogDayIcon = html`
 </svg>
 `;
 export const fogNightIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -2142,7 +2142,7 @@ export const fogNightIcon = html`
 </svg>
 `;
 export const fogIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -2314,7 +2314,7 @@ export const fogIcon = html`
 </svg>
 `;
 export const frostDayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -2518,7 +2518,7 @@ export const frostDayIcon = html`
 </svg>
 `;
 export const frostNightIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -2787,7 +2787,7 @@ export const frostNightIcon = html`
 </svg>
 `;
 export const frostIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -2917,7 +2917,7 @@ export const frostIcon = html`
 </svg>
 `;
 export const hailIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
    <defs>
       <filter id="blur" x="-.24684" y="-.22776" width="1.4937" height="1.5756">
          <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -3051,7 +3051,7 @@ export const hailIcon = html`
 </svg>
 `;
 export const hazeDayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -3295,7 +3295,7 @@ export const hazeDayIcon = html`
 </svg>
 `;
 export const hazeNightIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -3604,7 +3604,7 @@ export const hazeNightIcon = html`
 </svg>
 `;
 export const hazeIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -3776,7 +3776,7 @@ export const hazeIcon = html`
 </svg>
 `;
 export const hurricaneIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
    <defs>
     <filter id="blur" x="-.16995" y="-.17864" width="1.3289" height="1.455">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -3881,7 +3881,7 @@ export const rainAndSnowMixIcon = html`
 
 `;
 export const rainy1DayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -4060,7 +4060,7 @@ export const rainy1DayIcon = html`
 </svg>
 `;
 export const rainy1NightIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -4303,7 +4303,7 @@ export const rainy1NightIcon = html`
 </svg>
 `;
 export const rainy1Icon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.24684" y="-.24132" width="1.4937" height="1.5878">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -4409,7 +4409,7 @@ export const rainy1Icon = html`
 </svg>
 `;
 export const rainy2DayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.20655" y="-.20592" width="1.403" height="1.4872">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -4613,7 +4613,7 @@ export const rainy2DayIcon = html`
 </svg>
 `;
 export const rainy2NightIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style type="text/css">
       <![CDATA[
@@ -5001,7 +5001,7 @@ export const rainy2Icon = html`
 </svg>
 `;
 export const rainy3DayIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.24684" y="-.22892" width="1.4937" height="1.5576">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -5207,7 +5207,7 @@ export const rainy3DayIcon = html`
 </svg>
 `;
 export const rainy3NightIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.24684" y="-.22892" width="1.4937" height="1.5576">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -5477,7 +5477,7 @@ export const rainy3NightIcon = html`
 </svg>
 `;
 export const rainy3Icon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.24684" y="-.22892" width="1.4937" height="1.5576">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -5652,7 +5652,7 @@ export const snowy3Icon = html`
 
 `;
 export const thunderstormsIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
  <defs>
   <filter id="blur" x="-.24684" y="-.19575" width="1.4937" height="1.4959">
    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
@@ -5921,7 +5921,7 @@ export const weatherIconsIcon = html`
 
 `;
 export const windIcon = html`
-<svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur" x="-.24684" y="-.27097" width="1.4937" height="1.6939">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -5956,7 +5956,7 @@ export const windIcon = html`
 
 
 // export const clearDayIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.34167" y="-.34167" width="1.6833" height="1.85">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -6087,7 +6087,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const clearNightIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.3038" y="-.3318" width="1.6076" height="1.894">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -6246,7 +6246,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const cloudy1DayIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.28472" width="1.403" height="1.6944">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -6424,7 +6424,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const cloudy1NightIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.19471" y="-.26087" width="1.3744" height="1.6884">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -6630,7 +6630,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const cloudy2DayIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.28472" width="1.403" height="1.6944">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -7014,7 +7014,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const cloudy3DayIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.28472" width="1.403" height="1.6944">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -7192,7 +7192,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const cloudy3NightIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.19471" y="-.26087" width="1.3744" height="1.6884">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -7398,7 +7398,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const cloudyIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.27097" width="1.4937" height="1.6939">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -7511,7 +7511,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const dustIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.27097" width="1.4937" height="1.6939">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -7542,7 +7542,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const fogDayIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -7786,7 +7786,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const fogNightIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -8095,7 +8095,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const frostIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -8267,7 +8267,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const hailIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -8471,7 +8471,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const hazeDayIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -8740,7 +8740,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const hazeNightIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -8870,7 +8870,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const hazeIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //    <defs>
 //       <filter id="blur" x="-.24684" y="-.22776" width="1.4937" height="1.5756">
 //          <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -9004,7 +9004,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const hurricaneIcon = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -9248,7 +9248,7 @@ export const windIcon = html`
 // </svg>`;
 
 // export const isolated-thunderstorms-day = html`
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -9556,7 +9556,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -9727,7 +9727,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- Tropical Storm | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //    <defs>
 //     <filter id="blur" x="-.16995" y="-.17864" width="1.3289" height="1.455">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -9817,7 +9817,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Isolated Thunderstorms | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.1975" width="1.403" height="1.4766">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -10190,7 +10190,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Isolated Thunderstorms | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.1975" width="1.403" height="1.4766">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -10590,7 +10590,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Isolated Thunderstorms | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.1975" width="1.403" height="1.4766">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -10854,7 +10854,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Mix of Rain and Sleet | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.22776" width="1.4937" height="1.5756">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -10994,7 +10994,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Mix of Rain and Snow | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.2345" width="1.4937" height="1.5712">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -11187,7 +11187,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -11365,7 +11365,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -11607,7 +11607,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.24132" width="1.4937" height="1.5878">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -11712,7 +11712,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.20592" width="1.403" height="1.4872">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -11914,7 +11914,7 @@ export const windIcon = html`
 //     </g>
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <style type="text/css">
 //       <![CDATA[
@@ -12170,7 +12170,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.23409" width="1.4937" height="1.5702">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -12300,7 +12300,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.22892" width="1.4937" height="1.5576">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -12505,7 +12505,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.22892" width="1.4937" height="1.5576">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -12774,7 +12774,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.22892" width="1.4937" height="1.5576">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -12907,7 +12907,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Scattered Thunderstorms | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.1975" width="1.403" height="1.4766">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -13280,7 +13280,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Scattered Thunderstorms | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.1975" width="1.403" height="1.4766">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -13562,7 +13562,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Scattered Thunderstorms | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.1975" width="1.403" height="1.4766">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -13826,7 +13826,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Severe Thunderstorm | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //     <defs>
 //         <filter id="blur" x="-.17571" y="-.19575" width="1.3379" height="1.4959">
 //             <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -14132,7 +14132,7 @@ export const windIcon = html`
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Mix of Sleet and Snow | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.22776" width="1.4937" height="1.5756">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -14357,7 +14357,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.23099" width="1.403" height="1.5634">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -14597,7 +14597,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.23099" width="1.403" height="1.5634">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -14865,7 +14865,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.26897" width="1.4937" height="1.6759">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -14996,7 +14996,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.23099" width="1.403" height="1.5634">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -15268,7 +15268,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.20655" y="-.23099" width="1.403" height="1.5634">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -15568,7 +15568,7 @@ export const windIcon = html`
 //   </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //  <defs>
 //   <filter id="blur" x="-.24684" y="-.26897" width="1.4937" height="1.6759">
 //    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
@@ -15728,7 +15728,7 @@ export const windIcon = html`
 // </svg>
 // <?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //    <defs>
 //       <filter id="blur" x="-.24684" y="-.26897" width="1.4937" height="1.6759">
 //          <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -16061,7 +16061,7 @@ export const windIcon = html`
 //    </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //    <defs>
 //       <filter id="blur" x="-.24684" y="-.26897" width="1.4937" height="1.6759">
 //          <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -16421,7 +16421,7 @@ export const windIcon = html`
 //    </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //    <defs>
 //       <filter id="blur" x="-.24684" y="-.26897" width="1.4937" height="1.6759">
 //          <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -16644,7 +16644,7 @@ export const windIcon = html`
 //    </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //  <defs>
 //   <filter id="blur" x="-.24684" y="-.19575" width="1.4937" height="1.4959">
 //    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
@@ -16905,7 +16905,7 @@ export const windIcon = html`
 // <?xml version="1.0" encoding="UTF-8"?>
 // <!-- (c) ammap.com | SVG weather icons -->
 // <!-- Tornado | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //     <defs>
 //         <filter id="blur" x="-.16995" y="-.17864" width="1.3289" height="1.455">
 //             <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -17270,7 +17270,7 @@ export const windIcon = html`
 //     </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
 // <!-- Tropical Storm | Contributed by hsoJ95 on GitHub: https://github.com/hsoj95 -->
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //     <defs>
 //         <style>
 //             <![CDATA[
@@ -17318,7 +17318,7 @@ export const windIcon = html`
 //       <circle cx="9.5" cy="13" r="1" fill="#fff" />
 //     </g>
 // </svg><?xml version="1.0" encoding="UTF-8"?>
-// <svg viewBox="0 0 48 55" version="1.1" xmlns="http://www.w3.org/2000/svg">
+// <svg viewBox="0 0 55 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 //   <defs>
 //     <filter id="blur" x="-.24684" y="-.27097" width="1.4937" height="1.6939">
 //       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
