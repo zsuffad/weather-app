@@ -1,5 +1,6 @@
 import {html, css, unsafeCSS} from 'lit';
 import WeatherLitElement from './weather-lit-element';
+import { windIcon } from '../svg-icons/weather-icons.js';
 import {weatherIconsStyles, weatherIconsWindStyles} from '../styles/icon-styles.js';
 import {commonStyles} from '../styles/common-styles';
 
@@ -150,7 +151,10 @@ export class BasicWeatherWidget extends WeatherLitElement {
                     gap: 0.5rem;
                 }
                 .weather-icon {
-                    font-size: 7rem;
+                    svg {
+                        width: 100%;
+                        height: auto;
+                    }
                 }
                 .weather-info {
                     display: flex;
@@ -255,6 +259,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
                         <span class="temperature-unit unit">${this.temperatureUnit}</span>
                     </div>
                     <div class="windspeed">
+                        ${windIcon}
                         ${this.windSpeed}
                         <span class="windspeed-unit unit">${this.windSpeedUnit}</span>
                         ${this.windDirectionToIcon(this.windDirection)}

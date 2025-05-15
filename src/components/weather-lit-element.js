@@ -1,4 +1,15 @@
-import {html, LitElement} from 'lit';
+import {LitElement} from 'lit';
+import {
+    clearDayIcon,
+    clearNightIcon,
+    cloudy1DayIcon,
+    fogDayIcon,
+    rainy1DayIcon,
+    snowy1DayIcon,
+    snowy3DayIcon,
+    snowy3Icon,
+    thunderstormsIcon,
+} from '../svg-icons/weather-icons.js';
 // import {weatherIconsStyles, weatherIconsWindStyles} from '../styles/icon-styles.js';
 
 export default class WeatherLitElement extends LitElement {
@@ -45,44 +56,30 @@ export default class WeatherLitElement extends LitElement {
      * Get weather icon based on weather code
      * @returns {import('lit').TemplateResult} Weather icon character
      */
-    getWeatherIcon(weatherCode) {
+    getWeatherIcon(weatherCode, width = 128) {
         // Simple mapping of weather codes to icons
         // https://open-meteo.com/en/docs/weather-codes
         switch (true) {
             case weatherCode === 0:
-                return html`
-                    <i class="wi wi-day-sunny"></i>
-                `; // Clear sky
+                return clearDayIcon; // Clear sky
+                // If night?
+                // return clearNightIcon
             case weatherCode >= 1 && weatherCode <= 3:
-                return html`
-                    <i class="wi wi-day-cloudy"></i>
-                `; // Partly cloudy
+                return cloudy1DayIcon; // Partly cloudy
             case weatherCode >= 45 && weatherCode <= 48:
-                return html`
-                    <i class="wi wi-day-fog"></i>
-                `; // Fog
+                return fogDayIcon; // Fog
             case weatherCode >= 51 && weatherCode <= 67:
-                return html`
-                    <i class="wi wi-day-rain"></i>
-                `; // Rain
+                return rainy1DayIcon; // Rain
             case weatherCode >= 71 && weatherCode <= 77:
-                return html`
-                    <i class="wi wi-day-snow"></i>
-                `; // Snow
+                return snowy1DayIcon; // Snow
             case weatherCode >= 80 && weatherCode <= 82:
-                return html`
-                    <i class="wi wi-day-showers"></i>
-                `; // Rain showers
+                return snowy3DayIcon; // Rain showers
             case weatherCode >= 85 && weatherCode <= 86:
-                return html`<i class="wi wi-day-snow>`; // Snow showers
+                return snowy3Icon; // Snow showers
             case weatherCode >= 95 && weatherCode <= 99:
-                return html`
-                    <i class="wi wi-day-thunderstorm"></i>
-                `; // Thunderstorm
+                return thunderstormsIcon; // Thunderstorm
             default:
-                return html`
-                    <i class="wi wi-day-cloudy"></i>
-                `; // Default
+                return clearDayIcon; // Default
         }
     }
 }
