@@ -1,7 +1,6 @@
 import {html, css, unsafeCSS} from 'lit';
 import WeatherLitElement from './weather-lit-element';
 import {windIcon} from '../svg-icons/weather-icons.js';
-import {weatherIconsStyles, weatherIconsWindStyles} from '../styles/icon-styles.js';
 import {commonStyles} from '../styles/common-styles';
 
 /**
@@ -128,8 +127,6 @@ export class BasicWeatherWidget extends WeatherLitElement {
     static get styles() {
         // language=css
         return [
-            unsafeCSS(weatherIconsStyles),
-            unsafeCSS(weatherIconsWindStyles),
             commonStyles,
             css`
                 :host {
