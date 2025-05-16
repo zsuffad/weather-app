@@ -4,6 +4,10 @@ import {
     clearNightIcon,
     cloudy1DayIcon,
     cloudy1NightIcon,
+    cloudy2DayIcon,
+    cloudy2NightIcon,
+    cloudy3DayIcon,
+    cloudy3NightIcon,
     fogDayIcon,
     rainy1DayIcon,
     snowy1DayIcon,
@@ -72,10 +76,14 @@ export default class WeatherLitElement extends LitElement {
         // Simple mapping of weather codes to icons
         // https://open-meteo.com/en/docs/weather-codes
         switch (true) {
-            case weatherCode === 0:
+            case weatherCode == 0:
                 return isDayTime ? clearDayIcon : clearNightIcon; // Clear sky
-            case weatherCode >= 1 && weatherCode <= 3:
+            case weatherCode == 1:
                 return isDayTime ? cloudy1DayIcon : cloudy1NightIcon; // Partly cloudy
+            case weatherCode == 2:
+                return isDayTime ? cloudy2DayIcon : cloudy2NightIcon;
+            case weatherCode == 3:
+                return isDayTime ? cloudy3DayIcon : cloudy3NightIcon;
             case weatherCode >= 45 && weatherCode <= 48:
                 return fogDayIcon; // Fog
             case weatherCode >= 51 && weatherCode <= 67:

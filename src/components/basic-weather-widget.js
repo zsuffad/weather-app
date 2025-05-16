@@ -1,4 +1,4 @@
-import {html, css, unsafeCSS} from 'lit';
+import {html, css} from 'lit';
 import WeatherLitElement from './weather-lit-element';
 import {windIcon} from '../svg-icons/weather-icons.js';
 import {commonStyles} from '../styles/common-styles';

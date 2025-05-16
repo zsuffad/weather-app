@@ -1,7 +1,7 @@
 import {html, css, render} from 'lit';
 // import {classMap} from 'lit/directives/class-map.js';
 import {commonStyles} from '../styles/common-styles';
-import {cloudy1DayIcon, windIcon} from '../svg-icons/weather-icons.js';
+import {cloudy1DayIcon} from '../svg-icons/weather-icons.js';
 import WeatherLitElement from './weather-lit-element';
 import {BasicWeatherWidget} from './basic-weather-widget.js';
 import {DailyForecastWidget} from './daily-forecast-widget.js';
@@ -34,7 +34,6 @@ export class AppShell extends WeatherLitElement {
         this.locationSettingsOpen = this.currentLocation.city ? false : true;
     }
 
-
     static get scopedElements() {
         return {
             'basic-weather-widget': BasicWeatherWidget,
@@ -45,8 +44,6 @@ export class AppShell extends WeatherLitElement {
 
     async connectedCallback() {
         super.connectedCallback();
-
-
 
         // Load font using FontFace API
         const font = new FontFace('weathericons', 'url(/font/weathericons-regular-webfont.woff2) format("woff2")');
@@ -127,15 +124,17 @@ export class AppShell extends WeatherLitElement {
 
     getLocation() {
         if ('geolocation' in navigator) {
-
             try {
-                console.log('navigator.geolocation.getCurrentPosition', navigator.geolocation.getCurrentPosition((position) => {
-                    console.log('position', position);
-                    this.currentLocation = {
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                    };
-                })) ;
+                console.log(
+                    'navigator.geolocation.getCurrentPosition',
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        console.log('position', position);
+                        this.currentLocation = {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                        };
+                    }),
+                );
 
                 navigator.geolocation.getCurrentPosition((position) => {
                     console.log('position', position);
@@ -225,9 +224,11 @@ export class AppShell extends WeatherLitElement {
                             this.fetchGeocodingApi(event);
                         }
                     }}"
-                    value="${ this.currentLocation.city ? `${this.currentLocation.city} (${this.currentLocation.country})` : ''}"
+                    value="${this.currentLocation.city
+                        ? `${this.currentLocation.city} (${this.currentLocation.country})`
+                        : ''}"
                     placeholder="Enter City Name" />
-                <button class="set-gps-position-button" @click="${this.getLocation}">⌖  </button>
+                <button class="set-gps-position-button" @click="${this.getLocation}">⌖</button>
 
                 <div class="location-results"></div>
             </div>
@@ -268,7 +269,7 @@ export class AppShell extends WeatherLitElement {
                     cursor: pointer;
                     position: absolute;
                     top: calc(var(--input-height) + 13px);
-                    box-shadow: 1px 1px 20px 6px rgba(0,0,0,0.3);
+                    box-shadow: 1px 1px 20px 6px rgba(0, 0, 0, 0.3);
 
                     &.enabled {
                         display: flex;
@@ -297,7 +298,7 @@ export class AppShell extends WeatherLitElement {
                     text-align: center;
                     position: absolute;
                     right: 0;
-                    top: .25rem;
+                    top: 0.25rem;
                     font-size: 25px;
                 }
             `,
@@ -308,37 +309,32 @@ export class AppShell extends WeatherLitElement {
         return html`
             <header>
                 <div class="location-settings">
-                    <div class="search-location">
-                        ${this.renderSetCityWidget()}
-                    </div>
+                    <div class="search-location">${this.renderSetCityWidget()}</div>
                 </div>
             </header>
-            ${
-                this.currentLocation.city
+            ${this.currentLocation.city
                 ? html`
-                    <main>
-                        <basic-weather-widget
-                            class="basic-weather-widget"
-                            id="basic-weather-widget"
-                            .currentLocation=${this.currentLocation}
-                            .weatherData=${this.weatherData}></basic-weather-widget>
-                        <daily-forecast-widget
-                            class="daily-forecast-widget"
-                            id="daily-forecast-widget"
-                            .currentLocation=${this.currentLocation}
-                            .weatherData=${this.weatherData}></daily-forecast-widget>
-                        <weekly-forecast-widget
-                            class="weekly-forecast-widget"
-                            id="weekly-forecast-widget"
-                            .currentLocation=${this.currentLocation}
-                            .weatherData=${this.weatherData}></weekly-forecast-widget>
-                    </main>
-                `
+                      <main>
+                          <basic-weather-widget
+                              class="basic-weather-widget"
+                              id="basic-weather-widget"
+                              .currentLocation=${this.currentLocation}
+                              .weatherData=${this.weatherData}></basic-weather-widget>
+                          <daily-forecast-widget
+                              class="daily-forecast-widget"
+                              id="daily-forecast-widget"
+                              .currentLocation=${this.currentLocation}
+                              .weatherData=${this.weatherData}></daily-forecast-widget>
+                          <weekly-forecast-widget
+                              class="weekly-forecast-widget"
+                              id="weekly-forecast-widget"
+                              .currentLocation=${this.currentLocation}
+                              .weatherData=${this.weatherData}></weekly-forecast-widget>
+                      </main>
+                  `
                 : html`
-                    ${cloudy1DayIcon}
-                `
-            }
-
+                      ${cloudy1DayIcon}
+                  `}
         `;
     }
 }

@@ -268,6 +268,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                 }
                 .head-end {
                     display: flex;
+                    gap: 8px;
                 }
                 .prev-day-forecast-button,
                 .next-day-forecast-button {
