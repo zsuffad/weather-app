@@ -1,6 +1,7 @@
 import {html, css, render} from 'lit';
 // import {classMap} from 'lit/directives/class-map.js';
 import {commonStyles} from '../styles/common-styles';
+import {cloudy1DayIcon, windIcon} from '../svg-icons/weather-icons.js';
 import WeatherLitElement from './weather-lit-element';
 import {BasicWeatherWidget} from './basic-weather-widget.js';
 import {DailyForecastWidget} from './daily-forecast-widget.js';
@@ -27,9 +28,12 @@ export class AppShell extends WeatherLitElement {
             city: undefined,
             timezone: undefined,
         };
+        // @TODO display warning if no currentLocation is set.
+        // Change UI to set location enabled.
         this.dailyForecastData = [];
         this.locationSettingsOpen = this.currentLocation.city ? false : true;
     }
+
 
     static get scopedElements() {
         return {
@@ -41,6 +45,8 @@ export class AppShell extends WeatherLitElement {
 
     async connectedCallback() {
         super.connectedCallback();
+
+
 
         // Load font using FontFace API
         const font = new FontFace('weathericons', 'url(/font/weathericons-regular-webfont.woff2) format("woff2")');
@@ -78,6 +84,18 @@ export class AppShell extends WeatherLitElement {
 
     async firstUpdated() {
         this.fetchAndUpdateWeather();
+
+        const searchInput = this._('#city-search-input');
+        searchInput.addEventListener('focus', (event) => {
+            // Clear searchbar on click
+            event.target.value = '';
+        });
+        searchInput.addEventListener('blur', (event) => {
+            // Reset value to searchbar if clicked outside
+            if (event.target.value === '') {
+                event.target.value = `${this.currentLocation.city} (${this.currentLocation.country})`;
+            }
+        });
     }
 
     async fetchAndUpdateWeather() {
@@ -109,7 +127,16 @@ export class AppShell extends WeatherLitElement {
 
     getLocation() {
         if ('geolocation' in navigator) {
+
             try {
+                console.log('navigator.geolocation.getCurrentPosition', navigator.geolocation.getCurrentPosition((position) => {
+                    console.log('position', position);
+                    this.currentLocation = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                    };
+                })) ;
+
                 navigator.geolocation.getCurrentPosition((position) => {
                     console.log('position', position);
                     this.currentLocation = {
@@ -146,14 +173,14 @@ export class AppShell extends WeatherLitElement {
             if (geoData.results && geoData.results.length > 0) {
                 let locationList = [];
                 geoData.results.forEach((location) => {
-                    console.log(`location`, location);
                     locationList.push(html`
                         <div
                             class="location"
                             @click="${() => {
                                 this.selectLocation(location);
                             }}">
-                            ${location.name} [${location.country}]
+                            <div class="location-name">${location.name} (${location.country})</div>
+                            <div class="add-to-favorite">★</div>
                         </div>
                     `);
                 });
@@ -177,6 +204,9 @@ export class AppShell extends WeatherLitElement {
             timezone: location.timezone,
         };
 
+        const newInputValue = `${this.currentLocation.city} (${this.currentLocation.country})`;
+        this._('#city-search-input').value = newInputValue;
+
         localStorage.setItem('currentLocation', JSON.stringify(this.currentLocation));
 
         const resultsList = this._('.location-results');
@@ -195,23 +225,13 @@ export class AppShell extends WeatherLitElement {
                             this.fetchGeocodingApi(event);
                         }
                     }}"
+                    value="${ this.currentLocation.city ? `${this.currentLocation.city} (${this.currentLocation.country})` : ''}"
                     placeholder="Enter City Name" />
+                <button class="set-gps-position-button" @click="${this.getLocation}">⌖  </button>
 
                 <div class="location-results"></div>
             </div>
         `;
-    }
-
-    renderGetLocationButton() {
-        return html`
-            <div class="location-settings">
-                <button @click="${this.getLocation}">GPS Location</button>
-            </div>
-        `;
-    }
-
-    toggleSettings() {
-        this.locationSettingsOpen = this.locationSettingsOpen === true ? false : true;
     }
 
     static get styles() {
@@ -232,21 +252,6 @@ export class AppShell extends WeatherLitElement {
                     padding: 1em;
                     border-radius: 0.25em;
                     margin-bottom: 1em;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    gap: 1rem;
-                }
-                .current-location {
-                    display: flex;
-                    gap: 1rem;
-                    align-items: baseline;
-                }
-                .current-city {
-                    font-size: 1.5rem;
-                    font-weight: bold;
-                    margin: 0;
-                    align-items: baseline;
                 }
                 main {
                     padding: 1em;
@@ -256,11 +261,14 @@ export class AppShell extends WeatherLitElement {
                 .location-results {
                     display: none;
                     background: white;
+                    width: 100%;
+                    z-index: 99;
                     flex-direction: column;
                     gap: 5px;
                     cursor: pointer;
                     position: absolute;
-                    top: var(--input-height);
+                    top: calc(var(--input-height) + 13px);
+                    box-shadow: 1px 1px 20px 6px rgba(0,0,0,0.3);
 
                     &.enabled {
                         display: flex;
@@ -268,19 +276,29 @@ export class AppShell extends WeatherLitElement {
                 }
                 .location {
                     padding: 9px;
+                    display: flex;
+                    justify-content: space-between;
                     &:hover {
                         background: rgba(0, 0, 0, 0.24);
                     }
-                }
-                .get-location-button {
-                    padding: 0.25rem 0;
                 }
                 .add-city {
                     position: relative;
                 }
                 .city-search-input {
                     height: var(--input-height);
-                    padding: 0.25rem;
+                    padding: 0.25rem 0.5rem;
+                    width: calc(100% - 0.75rem);
+                }
+                .set-gps-position-button {
+                    width: var(--input-height);
+                    height: var(--input-height);
+                    line-height: 25px;
+                    text-align: center;
+                    position: absolute;
+                    right: 0;
+                    top: .25rem;
+                    font-size: 25px;
                 }
             `,
         ];
@@ -289,65 +307,38 @@ export class AppShell extends WeatherLitElement {
     render() {
         return html`
             <header>
-                ${this.currentLocation.city
-                    ? html`
-                          <div class="current-location">
-                              <div class="current-city">${this.currentLocation.city}</div>
-                              <div class="current-country">${this.currentLocation.country}</div>
-                              <div class="current-elevation">
-                                  ${this.currentLocation.elevation}
-                                  <span class="unit">m</span>
-                              </div>
-                          </div>
-                          <div class="location-setings-button">
-                              <button @click=${this.toggleSettings}>
-                                  <span class="visually-hidden">Set your position</span>
-                                  <img src="/icons/location-sign-svgrepo-com.svg" alt="" width="48" />
-                              </button>
-                          </div>
-                          ${this.locationSettingsOpen
-                              ? html`
-                                    <div class="location-settings">
-                                        <div class="search-location">${this.renderSetCityWidget()}</div>
-                                        <div class="get-location-button">${this.renderGetLocationButton()}</div>
-                                    </div>
-                                `
-                              : ''}
-                      `
-                    : html`
-                          <div class="location-setings-button">
-                              <button @click=${this.toggleSettings}>
-                                  <span class="visually-hidden">Set your position</span>
-                                  <img src="/icons/location-sign-svgrepo-com.svg" alt="" width="48" />
-                              </button>
-                          </div>
-                          ${this.locationSettingsOpen
-                              ? html`
-                                    <div class="location-settings">
-                                        <div class="search-location">${this.renderSetCityWidget()}</div>
-                                        <div class="get-location-button">${this.renderGetLocationButton()}</div>
-                                    </div>
-                                `
-                              : ''}
-                      `}
+                <div class="location-settings">
+                    <div class="search-location">
+                        ${this.renderSetCityWidget()}
+                    </div>
+                </div>
             </header>
-            <main>
-                <basic-weather-widget
-                    class="basic-weather-widget"
-                    id="basic-weather-widget"
-                    .currentLocation=${this.currentLocation}
-                    .weatherData=${this.weatherData}></basic-weather-widget>
-                <daily-forecast-widget
-                    class="daily-forecast-widget"
-                    id="daily-forecast-widget"
-                    .currentLocation=${this.currentLocation}
-                    .weatherData=${this.weatherData}></daily-forecast-widget>
-                <weekly-forecast-widget
-                    class="weekly-forecast-widget"
-                    id="weekly-forecast-widget"
-                    .currentLocation=${this.currentLocation}
-                    .weatherData=${this.weatherData}></weekly-forecast-widget>
-            </main>
+            ${
+                this.currentLocation.city
+                ? html`
+                    <main>
+                        <basic-weather-widget
+                            class="basic-weather-widget"
+                            id="basic-weather-widget"
+                            .currentLocation=${this.currentLocation}
+                            .weatherData=${this.weatherData}></basic-weather-widget>
+                        <daily-forecast-widget
+                            class="daily-forecast-widget"
+                            id="daily-forecast-widget"
+                            .currentLocation=${this.currentLocation}
+                            .weatherData=${this.weatherData}></daily-forecast-widget>
+                        <weekly-forecast-widget
+                            class="weekly-forecast-widget"
+                            id="weekly-forecast-widget"
+                            .currentLocation=${this.currentLocation}
+                            .weatherData=${this.weatherData}></weekly-forecast-widget>
+                    </main>
+                `
+                : html`
+                    ${cloudy1DayIcon}
+                `
+            }
+
         `;
     }
 }
