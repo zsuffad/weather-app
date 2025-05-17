@@ -1,26 +1,11 @@
 import {LitElement} from 'lit';
-import {
-    clearDayIcon,
-    clearNightIcon,
-    cloudy1DayIcon,
-    cloudy1NightIcon,
-    cloudy2DayIcon,
-    cloudy2NightIcon,
-    cloudy3DayIcon,
-    cloudy3NightIcon,
-    fogDayIcon,
-    rainy1DayIcon,
-    snowy1DayIcon,
-    snowy3DayIcon,
-    snowy3Icon,
-    thunderstormsIcon,
-} from '../svg-icons/weather-icons.js';
-// import {weatherIconsStyles, weatherIconsWindStyles} from '../styles/icon-styles.js';
+import {getAllIcons} from '../svg-icons/weather-icons.js';
 
 export default class WeatherLitElement extends LitElement {
     constructor() {
         super();
         this.weatherData = {};
+        this.allWeatherIcons = getAllIcons(); // usage: clearDayIcon = this.allWeatherIcons.clearDay
     }
 
     static get properties() {
@@ -51,15 +36,6 @@ export default class WeatherLitElement extends LitElement {
         super.update(changedProperties);
     }
 
-    // static get styles() {
-    //     console.log('weatherIconsStyles', weatherIconsStyles);
-
-    //     return [
-    //         weatherIconsStyles,
-    //         weatherIconsWindStyles
-    //     ];
-    // }
-
     /**
      * Get weather icon based on weather code
      * @returns {import('lit').TemplateResult} Weather icon character
@@ -77,27 +53,27 @@ export default class WeatherLitElement extends LitElement {
         // https://open-meteo.com/en/docs/weather-codes
         switch (true) {
             case weatherCode == 0:
-                return isDayTime ? clearDayIcon : clearNightIcon; // Clear sky
+                return isDayTime ? this.allWeatherIcons.clearDay : this.allWeatherIcons.clearNight; // Clear sky
             case weatherCode == 1:
-                return isDayTime ? cloudy1DayIcon : cloudy1NightIcon; // Partly cloudy
+                return isDayTime ? this.allWeatherIcons.cloudy1Day : this.allWeatherIcons.cloudy1Night; // Partly cloudy
             case weatherCode == 2:
-                return isDayTime ? cloudy2DayIcon : cloudy2NightIcon;
+                return isDayTime ? this.allWeatherIcons.cloudy2Day : this.allWeatherIcons.cloudy2Night;
             case weatherCode == 3:
-                return isDayTime ? cloudy3DayIcon : cloudy3NightIcon;
+                return isDayTime ? this.allWeatherIcons.cloudy3Day : this.allWeatherIcons.cloudy3Night;
             case weatherCode >= 45 && weatherCode <= 48:
-                return fogDayIcon; // Fog
+                return this.allWeatherIcons.fogDay; // Fog
             case weatherCode >= 51 && weatherCode <= 67:
-                return rainy1DayIcon; // Rain
+                return this.allWeatherIcons.rainy1Day; // Rain
             case weatherCode >= 71 && weatherCode <= 77:
-                return snowy1DayIcon; // Snow
+                return this.allWeatherIcons.snowy1Day; // Snow
             case weatherCode >= 80 && weatherCode <= 82:
-                return snowy3DayIcon; // Rain showers
+                return this.allWeatherIcons.snowy3Day; // Rain showers
             case weatherCode >= 85 && weatherCode <= 86:
-                return snowy3Icon; // Snow showers
+                return this.allWeatherIcons.snowy3; // Snow showers
             case weatherCode >= 95 && weatherCode <= 99:
-                return thunderstormsIcon; // Thunderstorm
+                return this.allWeatherIcons.thunderstorms; // Thunderstorm
             default:
-                return clearDayIcon; // Default
+                return this.allWeatherIcons.clearDay; // Default
         }
     }
 }
