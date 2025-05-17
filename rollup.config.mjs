@@ -1,4 +1,6 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import fs from 'fs';
+import path from 'path';
 import terser from '@rollup/plugin-terser';
 import copy from 'rollup-plugin-copy';
 import html from 'rollup-plugin-html';
@@ -9,6 +11,25 @@ import { injectManifest } from 'rollup-plugin-workbox';
 import commonjs from '@rollup/plugin-commonjs';
 
 const production = !process.env.ROLLUP_WATCH;
+
+const htmlTemplatePlugin = () => {
+  return {
+    name: 'html-template-plugin',
+    generateBundle(options, bundle) {
+      const jsFile = Object.keys(bundle).find(file => file.endsWith('.js'));
+
+      // Prepare placeholder replacement
+      const html = fs.readFileSync('src/index.html', 'utf-8');
+      const result = html.replace('<%= jsBundle %>', jsFile);
+
+      this.emitFile({
+        type: 'asset',
+        fileName: 'index.html',
+        source: result,
+      });
+    }
+  };
+};
 
 export default [
   // Main application bundle
@@ -36,7 +57,9 @@ export default [
       commonjs({
         include: 'node_modules/**',
         strictRequires: 'auto',
-    }),
+      }),
+
+      htmlTemplatePlugin(),
 
       // Process HTML
       html({
@@ -56,9 +79,9 @@ export default [
           { src: 'public/font', dest: 'dist' },
           { src: 'public/icons', dest: 'dist' },
           { src: 'public/css', dest: 'dist' },
+          { src: 'public/screenshots', dest: 'dist' },
           { src: 'public/manifest.json', dest: 'dist' },
           { src: 'src/styles.css', dest: 'dist' },
-          { src: 'src/index.html', dest: 'dist' },
         ]
       }),
 
@@ -68,7 +91,8 @@ export default [
       // Dev server
       !production && serve({
         contentBase: 'dist',
-        port: 10001
+        port: 10001,
+        host: '0.0.0.0'
       }),
 
       // Live reload - uncomment and fix the configuration

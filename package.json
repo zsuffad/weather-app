@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "rollup -c -w",
         "build": "NODE_ENV=production rollup -c",
-        "serve": "serve dist",
+        "serve": "serve dist -p 10001",
         "fix": "npm run eslint:fix && npm run prettier:fix",
         "check": "npm run eslint && npm run prettier",
         "eslint:fix": "eslint \"**/*.{js,ts}\" --fix",
@@ -39,6 +39,7 @@
         "rollup-plugin-html": "^0.2.1",
         "rollup-plugin-livereload": "^2.0.5",
         "rollup-plugin-serve": "^3.0.0",
-        "rollup-plugin-workbox": "^8.1.2"
+        "rollup-plugin-workbox": "^8.1.2",
+        "serve": "^14.2.4"
     }
 }
