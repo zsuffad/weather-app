@@ -1,7 +1,6 @@
 import {html, css, render} from 'lit';
 // import {classMap} from 'lit/directives/class-map.js';
 import {commonStyles} from '../styles/common-styles';
-import {cloudy1DayIcon} from '../svg-icons/weather-icons.js';
 import WeatherLitElement from './weather-lit-element';
 import {BasicWeatherWidget} from './basic-weather-widget.js';
 import {DailyForecastWidget} from './daily-forecast-widget.js';
@@ -333,7 +332,7 @@ export class AppShell extends WeatherLitElement {
                       </main>
                   `
                 : html`
-                      ${cloudy1DayIcon}
+                      ${this.allWeatherIcons.cloudy1Day}
                   `}
         `;
     }

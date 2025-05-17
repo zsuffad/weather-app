@@ -1,6 +1,5 @@
 import {html, css} from 'lit';
 import WeatherLitElement from './weather-lit-element';
-import {windIcon} from '../svg-icons/weather-icons.js';
 import {commonStyles} from '../styles/common-styles';
 
 /**
@@ -215,6 +214,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
         ];
     }
 
+    // @TODO fix this icons
     windDirectionToIcon(direction) {
         const iconNames = [
             'towards-0-deg',
@@ -256,7 +256,7 @@ export class BasicWeatherWidget extends WeatherLitElement {
                         <span class="temperature-unit unit">${this.temperatureUnit}</span>
                     </div>
                     <div class="windspeed">
-                        ${windIcon} ${this.windSpeed}
+                        ${this.allWeatherIcons.wind} ${this.windSpeed}
                         <span class="windspeed-unit unit">${this.windSpeedUnit}</span>
                         ${this.windDirectionToIcon(this.windDirection)}
                     </div>
