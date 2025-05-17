@@ -4,7 +4,7 @@ import {css} from 'lit';
 // You'll need to manually copy the CSS content from your icon library files
 export const commonStyles = css`
     :host {
-        --light-gray: rgba(123, 123, 123, 0.5);
+        --light-gray: rgba(117, 117, 117, 1);
         --input-height: 2rem;
     }
 
