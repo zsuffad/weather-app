@@ -1,12 +1,21 @@
 {
-    "name": "Weather",
-    "short_name": "weather",
+    "name": "Minimal Weather",
+    "short_name": "minimal-weather",
+    "description": "A minimalistic but data rich weathe application",
     "theme_color": "#f3f3f3",
     "background_color": "#f3f3f3",
     "display": "standalone",
     "orientation": "portrait",
     "scope": "/",
     "start_url": "/index.html",
+    "screenshots": [
+        {
+            "src": "'weather-app-main-screenshot.png'",
+            "sizes": "432x942",
+            "type": "image/jpg",
+            "platform": "wide"
+          }
+    ],
     "icons": [
         {
             "src": "favicon/favicon-96x96.png",
