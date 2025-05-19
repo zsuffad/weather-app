@@ -108,8 +108,48 @@ export class AppShell extends WeatherLitElement {
         const latitude = this.currentLocation.latitude;
         const longitude = this.currentLocation.longitude;
 
+        // Object containing url parameters
+        const urlParams = {
+            latitude: latitude,
+            longitude: longitude,
+            hourly: [
+                'temperature_2m',
+                'weathercode',
+                'wind_speed_10m',
+                'wind_direction_10m',
+                'cloud_cover',
+                'rain',
+                'precipitation',
+                'precipitation_probability',
+                'apparent_temperature',
+                'showers',
+                'snowfall',
+                'uv_index',
+                'is_day',
+                'sunshine_duration',
+            ],
+            daily: [
+                'weathercode',
+                'temperature_2m_max',
+                'temperature_2m_min',
+                'wind_speed_10m_max',
+                'wind_gusts_10m_max',
+                'winddirection_10m_dominant',
+                'cloud_cover_mean',
+                'rain_sum',
+                'precipitation_sum',
+                'precipitation_hours',
+                'precipitation_probability_max',
+                'uv_index_max',
+                'sunshine_duration',
+                'daylight_duration',
+            ],
+            timezone: 'auto',
+            current_weather: true,
+        };
+
         if (latitude && longitude) {
-            const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto`;
+            const url = this.buildOpenMeteoUrl(urlParams);
 
             try {
                 const response = await fetch(url);
@@ -119,6 +159,38 @@ export class AppShell extends WeatherLitElement {
                 console.log('Error fetching weather data:', error);
             }
         }
+    }
+
+    /**
+     * Builds a URL for the Open-Meteo API using provided parameters
+     * @param {object} params - The parameters object to convert to URL query parameters
+     * @returns {string} - The complete URL with query parameters
+     */
+    buildOpenMeteoUrl(params) {
+        // Start with the base URL
+        const baseUrl = 'https://api.open-meteo.com/v1/forecast';
+
+        // Create an array to hold the query parameters
+        const queryParams = [];
+
+        // Process each parameter
+        for (const [key, value] of Object.entries(params)) {
+            // Handle arrays like hourly and daily parameters
+            if (Array.isArray(value)) {
+                queryParams.push(`${key}=${value.join(',')}`);
+            }
+            // Handle boolean values
+            else if (typeof value === 'boolean') {
+                queryParams.push(`${key}=${value}`);
+            }
+            // Handle regular string/number values
+            else if (value !== undefined && value !== null) {
+                queryParams.push(`${key}=${encodeURIComponent(value)}`);
+            }
+        }
+
+        // Combine the base URL with the query parameters
+        return `${baseUrl}?${queryParams.join('&')}`;
     }
 
     getLocation() {
