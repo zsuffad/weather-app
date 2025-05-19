@@ -234,8 +234,6 @@ export class DailyForecastWidget extends WeatherLitElement {
             const currentHour = Number(timeZoneNow.getHours());
             const currentRow = Math.floor((currentHour / 24) * 8);
 
-            // @TODO set day/night columns
-            // Accordingly like day/night icons 6-19h
             options.grid.column.colors = [
                 '#FDFDFD',
                 '#F1F1F1',
@@ -246,6 +244,8 @@ export class DailyForecastWidget extends WeatherLitElement {
                 '#FDFDFD',
                 '#F1F1F1',
             ];
+            // @TODO set day/night columns
+            // Accordingly like day/night icons 6-19h
             options.grid.column.colors[currentRow] = '#CACACA';
 
             var chart = new ApexCharts(chartElement, options);
@@ -302,6 +302,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                         <!-- @TODO
                             If not today hide currentDate and
                             replace Today with dayName
+                            $renderWidgetHeader
                         -->
                         <span class="widget-title">Today</span>
                         <span class="date-time">${currentDate}</span>
