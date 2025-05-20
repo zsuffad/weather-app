@@ -128,6 +128,10 @@ export class DailyForecastWidget extends WeatherLitElement {
             var options = {
                 chart: {
                     type: 'line',
+                    parentHeightOffset: 0,
+                    sparkline: {
+                        enabled: true,
+                    },
                     toolbar: {
                         show: false,
                     },

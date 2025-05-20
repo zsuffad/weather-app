@@ -95,7 +95,10 @@ export class RainChartWidget extends WeatherLitElement {
             var options = {
                 chart: {
                     type: 'bar',
-                    height: '100px',
+                    height: '30px',
+                    sparkline: {
+                        enabled: true,
+                    },
                     toolbar: {
                         show: false,
                     },
@@ -244,7 +247,11 @@ export class RainChartWidget extends WeatherLitElement {
             var options = {
                 chart: {
                     type: 'bar',
-                    height: '100px',
+                    height: '40px',
+                    sparkline: {
+                        enabled: true,
+                    },
+                    parentHeightOffset: 0,
                     toolbar: {
                         show: false,
                     },
