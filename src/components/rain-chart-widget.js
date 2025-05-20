@@ -51,6 +51,9 @@ export class RainChartWidget extends WeatherLitElement {
     }
 
     renderRainChart() {
+        if (!this.weatherData.hourly) {
+            return;
+        }
         const rainData = [];
         // Get one day data and get every 3 hour data
 
@@ -196,6 +199,9 @@ export class RainChartWidget extends WeatherLitElement {
     }
 
     renderRainProbChart() {
+        if (!this.weatherData.hourly) {
+            return;
+        }
         // @TODO put this into a function
         const lastIndex = this.weatherData.hourly.time.length;
         this.dayShift = this.dayShift < 0 ? 0 : this.dayShift;

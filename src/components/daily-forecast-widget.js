@@ -36,8 +36,8 @@ export class DailyForecastWidget extends WeatherLitElement {
 
     firstUpdated() {
         // Render the chart
-        this.renderForecastChart();
-        this.loading = false;
+        // this.renderForecastChart();
+        // this.loading = false;
     }
 
     updated(changedProperties) {
