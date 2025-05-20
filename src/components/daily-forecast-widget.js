@@ -1,7 +1,8 @@
 import {html, css} from 'lit';
 import WeatherLitElement from './weather-lit-element';
-import ApexCharts from 'apexcharts';
+import {RainChartWidget} from './rain-chart-widget.js';
 import {commonStyles} from '../styles/common-styles';
+import ApexCharts from 'apexcharts';
 
 /**
  * DailyForecastWidget component for displaying daily weather forecast
@@ -23,7 +24,14 @@ export class DailyForecastWidget extends WeatherLitElement {
         this.loading = false;
         this.weatherData = {};
         this.dailyForecastData = [];
-        this.todayPlusNDay = 0;
+        this.currentLocation = {};
+        this.dayShift = 0;
+    }
+
+    static get scopedElements() {
+        return {
+            'rain-chart-widget': RainChartWidget,
+        };
     }
 
     firstUpdated() {
@@ -58,22 +66,27 @@ export class DailyForecastWidget extends WeatherLitElement {
      * @param {boolean} event go backward
      */
     setNextDay(event) {
-        console.log(`this.todayPlusNDay`, this.todayPlusNDay);
+        console.log(`this.dayShift`, this.dayShift);
         console.log('event', event.target);
         const trigger = event.target;
         const direction = trigger.getAttribute('data-direction');
         // Set change direction
-        // @TODO don't increase todayPlusNDay if we are out of range.
-        direction === 'back' ? this.todayPlusNDay-- : this.todayPlusNDay++;
+        // @TODO don't increase dayShift if we are out of range.
+        direction === 'back' ? this.dayShift-- : this.dayShift++;
 
         console.log('Set next day in daily forcast chart');
         if (this.weatherData.hourly) {
             const dailyData = [];
+            // @TODO put this into a function
             const lastIndex = this.weatherData.hourly.time.length;
-            this.todayPlusNDay = this.todayPlusNDay < 0 ? 0 : this.todayPlusNDay;
-            const from = this.todayPlusNDay * 24;
-            let to = this.todayPlusNDay * 24 + 24;
+            this.dayShift = this.dayShift < 0 ? 0 : this.dayShift;
+            // Disable back button
+            this.dayShift = this.dayShift > 6 ? 6 : this.dayShift;
+            // Disable forward button
+            const from = this.dayShift * 24;
+            let to = this.dayShift * 24 + 24;
             to = to > lastIndex ? lastIndex : to;
+            // @TODO put this into a function END
             // Get one day data and get every 3 hour data
             for (let i = from; i < to; i += 3) {
                 dailyData.push({
@@ -285,6 +298,8 @@ export class DailyForecastWidget extends WeatherLitElement {
     }
 
     render() {
+        console.log('DAILY FORCAST RENDER');
+
         if (this.loading) {
             return html`
                 <p class="loading">Loading weather data...</p>
@@ -325,6 +340,12 @@ export class DailyForecastWidget extends WeatherLitElement {
                     </div>
                 </div>
                 <div id="daily-forecast-chart"></div>
+                <rain-chart-widget
+                    class="rain-chart-widget"
+                    id="rain-chart-widget"
+                    .currentLocation=${this.currentLocation}
+                    .dayShift=${this.dayShift}
+                    .weatherData=${this.weatherData}></rain-chart-widget>
             </div>
         `;
     }

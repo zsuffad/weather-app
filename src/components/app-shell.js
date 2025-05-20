@@ -3,6 +3,7 @@ import {html, css, render} from 'lit';
 import {commonStyles} from '../styles/common-styles';
 import WeatherLitElement from './weather-lit-element';
 import {BasicWeatherWidget} from './basic-weather-widget.js';
+// import {RainChartWidget} from './rain-chart-widget.js';
 import {DailyForecastWidget} from './daily-forecast-widget.js';
 import {WeeklyForecastWidget} from './weekly-forecast-widget.js';
 
@@ -36,6 +37,7 @@ export class AppShell extends WeatherLitElement {
     static get scopedElements() {
         return {
             'basic-weather-widget': BasicWeatherWidget,
+            // 'rain-chart-widget': RainChartWidget,
             'daily-forecast-widget': DailyForecastWidget,
             'weekly-forecast-widget': WeeklyForecastWidget,
         };
