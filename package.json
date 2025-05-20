@@ -9,7 +9,7 @@
         "serve": "serve dist -p 10001",
         "fix": "npm run eslint:fix && npm run prettier:fix",
         "check": "npm run eslint && npm run prettier",
-        "eslint:fix": "eslint \"**/*.{js,ts}\" --fix",
+        "eslint:fix": "eslint \"src/*.{js,ts}\" --fix",
         "eslint": "eslint \"**/*.{js,ts}\"",
         "prettier:fix": "prettier \"**/*.{js,json,ts,md,yaml,yml}\" --write",
         "prettier": "prettier \"**/*.{js,json,ts,md,yaml,yml}\" --check"
