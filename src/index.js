@@ -1,5 +1,15 @@
 import './components/app-shell.js';
 
+function getBasePath() {
+    const path = window.location.pathname;
+    // For GitHub Pages: /weather-app/
+    // For local development: /
+    if (path.includes('/weather-app/')) {
+        return '/weather-app/';
+    }
+    return '/';
+}
+
 // Register service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
@@ -23,10 +33,16 @@ if ('serviceWorker' in navigator) {
 
         // Always register the service worker, but its behavior differs based on environment
         try {
-            const registration = await navigator.serviceWorker.register('/service-worker.js', {
+            const basePath = getBasePath();
+            const swPath = `${basePath}service-worker.js`;
+
+            const registration = await navigator.serviceWorker.register(swPath, {
                 type: 'module',
+                scope: basePath // This ensures the SW only controls the correct scope
             });
             console.log('SW registered: ', registration);
+            console.log('SW path: ', swPath);
+            console.log('SW scope: ', basePath);
         } catch (error) {
             console.log('SW registration failed: ', error);
         }
