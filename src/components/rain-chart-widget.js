@@ -368,14 +368,14 @@ export class RainChartWidget extends WeatherLitElement {
                 }
                 .chart--rain:before {
                     display: block;
-                    content: "💧";
+                    content: '💧';
                     position: absolute;
                     left: 0;
                     top: 50%;
                 }
                 .chart--rain-probability:before {
                     display: block;
-                    content: "%";
+                    content: '%';
                     position: absolute;
                     left: 0;
                     top: 50%;

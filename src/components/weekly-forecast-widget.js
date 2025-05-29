@@ -167,8 +167,7 @@ export class WeeklyForecastWidget extends WeatherLitElement {
         return [
             css`
                 ${commonStyles}
-
-            `
+            `,
         ];
     }
 

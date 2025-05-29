@@ -80,7 +80,6 @@ export class DailyForecastWidget extends WeatherLitElement {
 
         console.log('Set next day in daily forcast chart');
         if (this.weatherData.hourly) {
-
             const lastIndex = this.weatherData.hourly.time.length;
 
             if (this.dayShift < 0) {
@@ -295,7 +294,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                     position: relative;
 
                     &:before {
-                        content: "🌡";
+                        content: '🌡';
                         position: absolute;
                         left: 0;
                         top: 50%;
@@ -303,7 +302,6 @@ export class DailyForecastWidget extends WeatherLitElement {
                         color: #b00;
                     }
                 }
-
 
                 .daily-forecast-header {
                     display: flex;
@@ -358,12 +356,12 @@ export class DailyForecastWidget extends WeatherLitElement {
         const timeZone = this.weatherData.timezone;
         const displayDayName = displayDate.toLocaleString('en-UK', {
             timeZone: timeZone,
-            weekday: "long",
+            weekday: 'long',
         });
         const displayMonthDay = displayDate.toLocaleString('en-UK', {
             timeZone: timeZone,
-            month: "short",
-            day: "numeric",
+            month: 'short',
+            day: 'numeric',
         });
 
         return html`

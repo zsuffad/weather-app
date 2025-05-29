@@ -5,7 +5,7 @@ import {css} from 'lit';
 export const commonStyles = css`
     :host {
         --light-gray: rgba(117, 117, 117, 1);
-        --color-disabled: rgba(117, 117, 117, .5);
+        --color-disabled: rgba(117, 117, 117, 0.5);
         --input-height: 2rem;
     }
 
