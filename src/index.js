@@ -1,12 +1,27 @@
 import './components/app-shell.js';
 
+// Get the base path dynamically from current location
 function getBasePath() {
     const path = window.location.pathname;
-    // For GitHub Pages: /weather-app/
-    // For local development: /
-    if (path.includes('/weather-app/')) {
-        return '/weather-app/';
+
+    // If we're at root or just have a filename, return root
+    if (path === '/' || path.match(/^\/[^\/]*\.(html)$/)) {
+        return '/';
     }
+
+    // Extract directory path - everything up to the last directory
+    const segments = path.split('/').filter(Boolean);
+
+    // Remove filename if present (has extension)
+    if (segments.length > 0 && segments[segments.length - 1].includes('.')) {
+        segments.pop();
+    }
+
+    // If we have segments, return the first directory as base path
+    if (segments.length > 0) {
+        return '/' + segments[0] + '/';
+    }
+
     return '/';
 }
 

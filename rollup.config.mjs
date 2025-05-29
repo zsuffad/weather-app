@@ -1,6 +1,6 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import fs from 'fs';
-import path from 'path';
+// import path from 'path';
 import terser from '@rollup/plugin-terser';
 import copy from 'rollup-plugin-copy';
 import html from 'rollup-plugin-html';
@@ -9,6 +9,7 @@ import del from 'rollup-plugin-delete';
 import livereload from 'rollup-plugin-livereload';
 import { injectManifest } from 'rollup-plugin-workbox';
 import commonjs from '@rollup/plugin-commonjs';
+import { dynamicManifest } from './rollup-plugin-dynamic-manifest.mjs';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -20,7 +21,11 @@ const htmlTemplatePlugin = () => {
 
       // Prepare placeholder replacement
       const html = fs.readFileSync('src/index.html', 'utf-8');
-      const result = html.replace('<%= jsBundle %>', jsFile);
+      let result = html.replace('<%= jsBundle %>', jsFile);
+
+      if (process.env.BASE_PATH) {
+        result = result.replace(/<%= basePath %>/g, process.env.BASE_PATH);
+      }
 
       this.emitFile({
         type: 'asset',
@@ -70,6 +75,16 @@ export default [
           minifyCSS: production,
           minifyJS: production
         }
+      }),
+
+      // Generate dynamic manifest
+      dynamicManifest({
+        name: "Weather App",
+        shortName: "Weather",
+        description: "A beautiful weather application",
+        themeColor: "#007bff",
+        backgroundColor: "#ffffff",
+        // basePath: "/weather-app/" // Uncomment to override auto-detection
       }),
 
       // Copy static assets

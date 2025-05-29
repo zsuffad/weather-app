@@ -3,8 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "homepage": "https://zsuffad.github.io/weather-app/",
     "scripts": {
-        "dev": "rollup -c -w",
+        "dev": "BASE_PATH='/' rollup -c -w",
         "build": "NODE_ENV=production rollup -c",
         "serve": "serve dist -p 10001",
         "fix": "npm run eslint:fix && npm run prettier:fix",
