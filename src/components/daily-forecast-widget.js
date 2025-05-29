@@ -290,6 +290,21 @@ export class DailyForecastWidget extends WeatherLitElement {
             css`
                 ${commonStyles}
 
+                .chart--daily-forcast {
+                    padding-left: 20px;
+                    position: relative;
+
+                    &:before {
+                        content: "🌡";
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        font-size: 26px;
+                        color: #b00;
+                    }
+                }
+
+
                 .daily-forecast-header {
                     display: flex;
                     justify-content: space-between;
@@ -379,7 +394,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                         </button>
                     </div>
                 </div>
-                <div id="daily-forecast-chart"></div>
+                <div id="daily-forecast-chart" class="chart chart--daily-forcast"></div>
                 <rain-chart-widget
                     class="rain-chart-widget"
                     id="rain-chart-widget"

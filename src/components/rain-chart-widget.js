@@ -362,6 +362,24 @@ export class RainChartWidget extends WeatherLitElement {
                 .rain-chart-container {
                     margin-top: 0;
                 }
+                .chart {
+                    padding-left: 20px;
+                    position: relative;
+                }
+                .chart--rain:before {
+                    display: block;
+                    content: "💧";
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                }
+                .chart--rain-probability:before {
+                    display: block;
+                    content: "%";
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                }
             `,
         ];
     }
@@ -376,8 +394,8 @@ export class RainChartWidget extends WeatherLitElement {
 
         return html`
             <div id="rain-chart-container" class="rain-chart-container">
-                <div id="rain-chart"></div>
-                <div id="rain-prob-chart"></div>
+                <div id="rain-chart" class="chart chart--rain"></div>
+                <div id="rain-prob-chart" class="chart chart--rain-probability"></div>
             </div>
         `;
     }

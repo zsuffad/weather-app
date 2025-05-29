@@ -28,7 +28,6 @@ export class AppShell extends WeatherLitElement {
             city: undefined,
             timezone: undefined,
         };
-        // @TODO display warning if no currentLocation is set.
         // Change UI to set location enabled.
         this.dailyForecastData = [];
         this.locationSettingsOpen = this.currentLocation.city ? false : true;
@@ -37,7 +36,6 @@ export class AppShell extends WeatherLitElement {
     static get scopedElements() {
         return {
             'basic-weather-widget': BasicWeatherWidget,
-            // 'rain-chart-widget': RainChartWidget,
             'daily-forecast-widget': DailyForecastWidget,
             'weekly-forecast-widget': WeeklyForecastWidget,
         };
