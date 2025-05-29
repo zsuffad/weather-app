@@ -45,33 +45,32 @@ export class AppShell extends WeatherLitElement {
         super.connectedCallback();
 
         // Load font using FontFace API
-        const font = new FontFace('weathericons', 'url(/font/weathericons-regular-webfont.woff2) format("woff2")');
+        // const font = new FontFace('weathericons', 'url(/font/weathericons-regular-webfont.woff2) format("woff2")');
 
-        font.load()
-            .then((loadedFont) => {
-                // Add font to document's FontFaceSet
-                document.fonts.add(loadedFont);
-                console.log('Font loaded successfully in parent!');
+        // font.load()
+        //     .then((loadedFont) => {
+        //         // Add font to document's FontFaceSet
+        //         document.fonts.add(loadedFont);
+        //         console.log('Font loaded successfully in parent!');
 
-                // Dispatch an event to notify children that font is loaded
-                this.dispatchEvent(
-                    new CustomEvent('font-loaded', {
-                        bubbles: true,
-                        composed: true,
-                        detail: {fontFamily: 'weathericons'},
-                    }),
-                );
+        //         // Dispatch an event to notify children that font is loaded
+        //         this.dispatchEvent(
+        //             new CustomEvent('font-loaded', {
+        //                 bubbles: true,
+        //                 composed: true,
+        //                 detail: {fontFamily: 'weathericons'},
+        //             }),
+        //         );
 
-                this.requestUpdate();
-            })
-            .catch((error) => {
-                console.error('Failed to load font:', error);
-            });
+        //         this.requestUpdate();
+        //     })
+        //     .catch((error) => {
+        //         console.error('Failed to load font:', error);
+        //     });
     }
 
     async updated(_changedProperties) {
         if (_changedProperties.has('currentLocation')) {
-            console.log('[updated] this.currentLocation', this.currentLocation);
             this.fetchAndUpdateWeather();
         }
 
@@ -196,17 +195,6 @@ export class AppShell extends WeatherLitElement {
     getLocation() {
         if ('geolocation' in navigator) {
             try {
-                console.log(
-                    'navigator.geolocation.getCurrentPosition',
-                    navigator.geolocation.getCurrentPosition((position) => {
-                        console.log('position', position);
-                        this.currentLocation = {
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude,
-                        };
-                    }),
-                );
-
                 navigator.geolocation.getCurrentPosition((position) => {
                     console.log('position', position);
                     this.currentLocation = {
@@ -228,9 +216,6 @@ export class AppShell extends WeatherLitElement {
     }
 
     async fetchGeocodingApi(event) {
-        console.log(event);
-        console.log(`e.target.value`, event.target.value);
-
         try {
             let cityCharacters = event.target.value;
             const url = `https://geocoding-api.open-meteo.com/v1/search?name=${cityCharacters}&count=10&language=en&format=json`;
@@ -239,7 +224,6 @@ export class AppShell extends WeatherLitElement {
             };
             const response = await fetch(url, options);
             const geoData = await response.json();
-            console.log(`geoData`, geoData);
             if (geoData.results && geoData.results.length > 0) {
                 let locationList = [];
                 geoData.results.forEach((location) => {
@@ -264,7 +248,6 @@ export class AppShell extends WeatherLitElement {
     }
 
     selectLocation(location) {
-        console.log('location', location);
         this.currentLocation = {
             country: location.country,
             elevation: location.elevation,

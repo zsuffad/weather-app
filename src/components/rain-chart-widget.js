@@ -28,22 +28,16 @@ export class RainChartWidget extends WeatherLitElement {
     }
 
     firstUpdated() {
-        // Render the chart
-        // this.renderRainChart();
         this.loading = true;
     }
 
     updated(changedProperties) {
         if (changedProperties.has('weatherData') && this.weatherData && Object.keys(this.weatherData).length > 0) {
-            // if (this.weatherData.hourly) {
-            // }
-            console.log('[updated] this.weatherData', this.weatherData);
             this.renderRainChart();
             this.renderRainProbChart();
             this.loading = false;
         }
         if (changedProperties.has('dayShift')) {
-            console.log('[updated] dayShift', this.dayShift);
             this.renderRainChart();
             this.renderRainProbChart();
             this.loading = false;
@@ -228,7 +222,6 @@ export class RainChartWidget extends WeatherLitElement {
                 precipitation_probability_avg = 0;
             }
         }
-        console.log('rainProbData', rainProbData);
 
         const chartElement = this._('#rain-prob-chart');
         if (chartElement) {
@@ -366,14 +359,14 @@ export class RainChartWidget extends WeatherLitElement {
                     padding-left: 20px;
                     position: relative;
                 }
-                .chart--rain:before {
+                .chart--rain:not(:empty):before {
                     display: block;
                     content: '💧';
                     position: absolute;
                     left: 0;
                     top: 50%;
                 }
-                .chart--rain-probability:before {
+                .chart--rain-probability:not(:empty):before {
                     display: block;
                     content: '%';
                     position: absolute;
@@ -385,7 +378,6 @@ export class RainChartWidget extends WeatherLitElement {
     }
 
     render() {
-        console.log('RAIN FORCAST RENDER');
         if (this.loading) {
             return html`
                 <p class="loading">Loading rain chart...</p>

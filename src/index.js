@@ -53,11 +53,8 @@ if ('serviceWorker' in navigator) {
 
             const registration = await navigator.serviceWorker.register(swPath, {
                 type: 'module',
-                scope: basePath // This ensures the SW only controls the correct scope
+
             });
-            console.log('SW registered: ', registration);
-            console.log('SW path: ', swPath);
-            console.log('SW scope: ', basePath);
         } catch (error) {
             console.log('SW registration failed: ', error);
         }

@@ -51,17 +51,17 @@ export class BasicWeatherWidget extends WeatherLitElement {
 
         // Check if the font is already available
         document.fonts.ready.then(() => {
-            this.fontLoaded = document.fonts.check('1em weathericons');
-            console.log('Font check in child:', this.fontLoaded);
+            // this.fontLoaded = document.fonts.check('1em weathericons');
+            // console.log('Font check in child:', this.fontLoaded);
             this.requestUpdate();
         });
 
         // Listen for font-loaded event from parent
-        this.addEventListener('font-loaded', (e) => {
-            console.log('Font loaded event received in child:', e.detail.fontFamily);
-            this.fontLoaded = true;
-            this.requestUpdate();
-        });
+        // this.addEventListener('font-loaded', (e) => {
+        //     console.log('Font loaded event received in child:', e.detail.fontFamily);
+        //     this.fontLoaded = true;
+        //     this.requestUpdate();
+        // });
     }
 
     firstUpdated() {}
@@ -69,7 +69,6 @@ export class BasicWeatherWidget extends WeatherLitElement {
     updated(changedProperties) {
         if (changedProperties.has('weatherData') && this.weatherData && Object.keys(this.weatherData).length > 0) {
             // Move chart rendering logic here for forecastData changes
-            console.log('[updated] this.weatherData', this.weatherData);
             this.processWeatherData();
             this.loading = false;
         }

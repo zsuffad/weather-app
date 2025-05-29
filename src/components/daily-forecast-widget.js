@@ -70,15 +70,12 @@ export class DailyForecastWidget extends WeatherLitElement {
      * @param {boolean} event go backward
      */
     setNextDay(event) {
-        console.log(`this.dayShift`, this.dayShift);
-        console.log('event', event.target);
         const triggerButton = event.target;
         const direction = triggerButton.getAttribute('data-direction');
         // Set change direction
         // @TODO don't increase dayShift if we are out of range.
         direction === 'back' ? this.dayShift-- : this.dayShift++;
 
-        console.log('Set next day in daily forcast chart');
         if (this.weatherData.hourly) {
             const lastIndex = this.weatherData.hourly.time.length;
 
@@ -110,10 +107,9 @@ export class DailyForecastWidget extends WeatherLitElement {
             }
             if (dailyData.length) {
                 this.dailyForecastData = [...dailyData];
-                console.log('this.dailyForecastData', this.dailyForecastData);
                 this.renderForecastChart();
             } else {
-                console.log('No more data. Maybe go back');
+                // console.log('No more data. Maybe go back');
             }
         }
     }
@@ -293,7 +289,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                     padding-left: 20px;
                     position: relative;
 
-                    &:before {
+                    &:not(:empty):before {
                         content: '🌡';
                         position: absolute;
                         left: 0;
@@ -343,8 +339,6 @@ export class DailyForecastWidget extends WeatherLitElement {
     }
 
     render() {
-        console.log('DAILY FORCAST RENDER');
-
         if (this.loading) {
             return html`
                 <p class="loading">Loading weather data...</p>
