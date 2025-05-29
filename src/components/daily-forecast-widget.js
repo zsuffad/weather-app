@@ -294,10 +294,18 @@ export class DailyForecastWidget extends WeatherLitElement {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+
+                    & > div {
+                        flex-basis: 33%;
+                    }
+                }
+                .header-date {
+                    text-align: center;
                 }
                 .header-buttons {
                     display: flex;
                     gap: 8px;
+                    justify-content: flex-end;
                 }
                 .prev-day-forecast-button,
                 .next-day-forecast-button {
@@ -331,23 +339,26 @@ export class DailyForecastWidget extends WeatherLitElement {
         }
 
         const currentTime = new Date();
-        const displayTime = new Date(currentTime.setDate(currentTime.getDate() + this.dayShift));
+        const displayDate = new Date(currentTime.setDate(currentTime.getDate() + this.dayShift));
         const timeZone = this.weatherData.timezone;
-        const displayDate = displayTime.toLocaleString('hu-HU', {
+        const displayDayName = displayDate.toLocaleString('en-UK', {
             timeZone: timeZone,
             weekday: "long",
-            // month: "short",
-            // day: "numeric",
+        });
+        const displayMonthDay = displayDate.toLocaleString('en-UK', {
+            timeZone: timeZone,
+            month: "short",
+            day: "numeric",
         });
 
         return html`
             <div id="daily-forecast-container" class="widget-container">
                 <div class="daily-forecast-header">
                     <div class="header-title">
-                        <span class="widget-title">Today</span>
+                        <span class="widget-title">${this.dayShift === 0 ? 'Today' : displayMonthDay}</span>
                     </div>
                     <div class="header-date">
-                        <span class="date-time">${displayDate}</span>
+                        <span class="date-time">${displayDayName}</span>
                     </div>
                     <div class="header-buttons">
                         <button
