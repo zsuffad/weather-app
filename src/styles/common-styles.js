@@ -23,6 +23,10 @@ export const commonStyles = css`
         overflow: hidden;
     }
 
+    .widget-container {
+        margin-top: 1rem;
+    }
+
     .widget-title {
         font-size: 1.75rem;
         font-weight: bold;

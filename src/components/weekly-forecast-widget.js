@@ -164,7 +164,12 @@ export class WeeklyForecastWidget extends WeatherLitElement {
 
     static get styles() {
         // language=css
-        return [commonStyles, css``];
+        return [
+            css`
+                ${commonStyles}
+
+            `
+        ];
     }
 
     render() {
@@ -175,7 +180,7 @@ export class WeeklyForecastWidget extends WeatherLitElement {
         }
 
         return html`
-            <div id="weekly-forecast-container">
+            <div id="weekly-forecast-container" class="widget-container">
                 <span class="widget-title">Next 7 days</span>
                 <div id="weekly-forecast-chart"></div>
             </div>

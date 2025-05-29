@@ -341,7 +341,7 @@ export class DailyForecastWidget extends WeatherLitElement {
         });
 
         return html`
-            <div id="daily-forecast-container" class="daily-forecast-container">
+            <div id="daily-forecast-container" class="widget-container">
                 <div class="daily-forecast-header">
                     <div class="header-title">
                         <span class="widget-title">Today</span>
