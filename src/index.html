@@ -5,20 +5,20 @@
   <meta name="description" content="Minimalistic weather app.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2196f3">
-  <title>Weather app</title>
+  <title>Minimal Weather</title>
   <link rel="manifest" href="<%= basePath %>manifest.json">
   <link rel="stylesheet" href="<%= basePath %>styles.css">
   <link rel="icon" type="image/png" href="<%= basePath %>favicon/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="<%= basePath %>favicon/favicon.svg" />
   <link rel="shortcut icon" href="<%= basePath %>favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="<%= basePath %>favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Weather" />
+  <meta name="apple-mobile-web-app-title" content="Minimal Weather" />
   <!-- Add iOS meta tags and icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="white">
   <meta name="apple-mobile-web-app-title" content="Weather app">
-  <link rel="preload" href="/font/weathericons-regular-webfont.woff2" as="font" type="font/woff2" crossorigin>
-  <script type="module" src="<%= jsBundle %>"></script>
+  <link rel="preload" href="<%= basePath %>font/weathericons-regular-webfont.woff2" as="font" type="font/woff2" crossorigin>
+  <script type="module" src="<%= basePath %><%= jsBundle %>"></script>
 </head>
 <body>
   <noscript>
