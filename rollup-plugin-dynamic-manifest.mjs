@@ -29,9 +29,9 @@ export const dynamicManifest = (options = {}) => {
       const normalizedBasePath = basePath.endsWith('/') ? basePath : basePath + '/';
 
       const manifest = {
-        name: options.name || "Weather App",
-        short_name: options.shortName || "Weather",
-        description: options.description || "A weather application",
+        name: options.name || "Minimal Weather",
+        short_name: options.shortName || "Mini Weather",
+        description: options.description || "A Minimal Weather Application",
         start_url: normalizedBasePath,
         scope: normalizedBasePath,
         display: options.display || "standalone",
@@ -39,20 +39,29 @@ export const dynamicManifest = (options = {}) => {
         theme_color: options.themeColor || "#007bff",
         orientation: options.orientation || "portrait-primary",
         icons: (options.icons || [
-          { size: "72x72" },
           { size: "96x96" },
-          { size: "128x128" },
-          { size: "144x144" },
-          { size: "152x152" },
           { size: "192x192" },
-          { size: "384x384" },
           { size: "512x512" }
         ]).map(icon => ({
-          src: `${normalizedBasePath}icons/icon-${icon.size}.png`,
+          src: `${normalizedBasePath}favicon/favicon-${icon.size}.png`,
           sizes: icon.size,
           type: icon.type || "image/png",
           ...(icon.purpose ? { purpose: icon.purpose } : {})
-        }))
+        })),
+        screenshots: options.screenshots || [
+          {
+              "src": `${normalizedBasePath}screenshots/weather-app-main-screenshot.png`,
+              "sizes": "432x988",
+              "type": "image/jpg",
+              "form_factor": "wide"
+          },
+          {
+              "src": `${normalizedBasePath}screenshots/weather-app-main-screenshot.png`,
+              "sizes": "432x988",
+              "type": "image/jpg",
+              "form_factor": "narrow"
+          }
+        ],
       };
 
       this.emitFile({

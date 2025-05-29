@@ -10,10 +10,10 @@
     "start_url": "/index.html",
     "screenshots": [
         {
-            "src": "'weather-app-main-screenshot.png'",
-            "sizes": "432x942",
+            "src": "weather-app-main-screenshot.png",
+            "sizes": "432x988",
             "type": "image/jpg",
-            "platform": "wide"
+            "form_factor": "wide"
         }
     ],
     "icons": [
@@ -23,15 +23,14 @@
             "type": "image/png"
         },
         {
-            "src": "favicon/web-app-manifest-192x192.png",
+            "src": "favicon/favicon-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "favicon/web-app-manifest-512x512.png",
+            "src": "favicon/favicon-512x512.png",
             "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any maskable"
+            "type": "image/png"
         }
     ]
 }
