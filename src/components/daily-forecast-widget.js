@@ -16,6 +16,8 @@ export class DailyForecastWidget extends WeatherLitElement {
             weatherData: {type: Object},
             currentLocation: {type: Object},
             dailyForecastData: {type: Array},
+            backButtonDisabled: {type: Boolean},
+            forwardButtonDisabled: {type: Boolean},
         };
     }
 
@@ -26,6 +28,8 @@ export class DailyForecastWidget extends WeatherLitElement {
         this.dailyForecastData = [];
         this.currentLocation = {};
         this.dayShift = 0;
+        this.backButtonDisabled = true;
+        this.forwardButtonDisabled = false;
     }
 
     static get scopedElements() {
@@ -68,25 +72,35 @@ export class DailyForecastWidget extends WeatherLitElement {
     setNextDay(event) {
         console.log(`this.dayShift`, this.dayShift);
         console.log('event', event.target);
-        const trigger = event.target;
-        const direction = trigger.getAttribute('data-direction');
+        const triggerButton = event.target;
+        const direction = triggerButton.getAttribute('data-direction');
         // Set change direction
         // @TODO don't increase dayShift if we are out of range.
         direction === 'back' ? this.dayShift-- : this.dayShift++;
 
         console.log('Set next day in daily forcast chart');
         if (this.weatherData.hourly) {
-            const dailyData = [];
-            // @TODO put this into a function
+
             const lastIndex = this.weatherData.hourly.time.length;
-            this.dayShift = this.dayShift < 0 ? 0 : this.dayShift;
-            // Disable back button
-            this.dayShift = this.dayShift > 6 ? 6 : this.dayShift;
-            // Disable forward button
+
+            if (this.dayShift < 0) {
+                this.dayShift = 0;
+                this.backButtonDisabled = true;
+                this.forwardButtonDisabled = false;
+            } else if (this.dayShift > 6) {
+                this.dayShift = 6;
+                this.forwardButtonDisabled = true;
+                this.backButtonDisabled = false;
+            } else {
+                this.forwardButtonDisabled = false;
+                this.backButtonDisabled = false;
+            }
+
             const from = this.dayShift * 24;
             let to = this.dayShift * 24 + 24;
             to = to > lastIndex ? lastIndex : to;
-            // @TODO put this into a function END
+
+            const dailyData = [];
             // Get one day data and get every 3 hour data
             for (let i = from; i < to; i += 3) {
                 dailyData.push({
@@ -273,29 +287,35 @@ export class DailyForecastWidget extends WeatherLitElement {
     static get styles() {
         // language=css
         return [
-            commonStyles,
             css`
-                .daily-forecast-container {
-                    margin-top: 1rem;
-                }
+                ${commonStyles}
+
                 .daily-forecast-header {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                 }
-                .head-end {
+                .header-buttons {
                     display: flex;
                     gap: 8px;
                 }
                 .prev-day-forecast-button,
                 .next-day-forecast-button {
                     cursor: pointer;
-                    display: block;
-                    border: 1px solid black;
+                    display: flex;
+                    border: 1px solid #a6a6a6;
+                    color: #333;
                     width: 30px;
                     height: 30px;
-                    line-height: 30px;
-                    text-align: center;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 4px;
+
+                    &:disabled {
+                        border: 1px solid var(--color-disabled);
+                        color: var(--color-disabled);
+                        opacity: 0.5;
+                    }
                 }
             `,
         ];
@@ -311,36 +331,41 @@ export class DailyForecastWidget extends WeatherLitElement {
         }
 
         const currentTime = new Date();
+        const displayTime = new Date(currentTime.setDate(currentTime.getDate() + this.dayShift));
         const timeZone = this.weatherData.timezone;
-        const currentDate = currentTime.toLocaleString('at-DE', {timeZone: timeZone});
+        const displayDate = displayTime.toLocaleString('hu-HU', {
+            timeZone: timeZone,
+            weekday: "long",
+            // month: "short",
+            // day: "numeric",
+        });
 
         return html`
             <div id="daily-forecast-container" class="daily-forecast-container">
                 <div class="daily-forecast-header">
-                    <div class="header-start">
-                        <!-- @TODO
-                            If not today hide currentDate and
-                            replace Today with dayName
-                            $renderWidgetHeader
-                        -->
+                    <div class="header-title">
                         <span class="widget-title">Today</span>
-                        <span class="date-time">${currentDate}</span>
                     </div>
-                    <div class="head-end">
-                        <span
+                    <div class="header-date">
+                        <span class="date-time">${displayDate}</span>
+                    </div>
+                    <div class="header-buttons">
+                        <button
                             class="prev-day-forecast-button"
                             title="Prev day"
                             data-direction="back"
+                            ?disabled=${this.backButtonDisabled}
                             @click=${this.setNextDay}>
                             <
-                        </span>
-                        <span
+                        </button>
+                        <button
                             class="next-day-forecast-button"
                             title="Next day"
                             data-direction="forward"
+                            ?disabled=${this.forwardButtonDisabled}
                             @click=${this.setNextDay}>
                             >
-                        </span>
+                        </button>
                     </div>
                 </div>
                 <div id="daily-forecast-chart"></div>
