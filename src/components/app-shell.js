@@ -282,7 +282,9 @@ export class AppShell extends WeatherLitElement {
                         ? `${this.currentLocation.city} (${this.currentLocation.country})`
                         : ''}"
                     placeholder="Enter City Name" />
-                <button class="set-gps-position-button" @click="${this.getLocation}">⌖</button>
+                <button class="set-gps-position-button" @click="${this.getLocation}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
+                </button>
 
                 <div class="location-results"></div>
             </div>
@@ -348,12 +350,12 @@ export class AppShell extends WeatherLitElement {
                 .set-gps-position-button {
                     width: var(--input-height);
                     height: var(--input-height);
-                    line-height: 25px;
-                    text-align: center;
                     position: absolute;
                     right: 0;
                     top: 0.25rem;
-                    font-size: 25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             `,
         ];
