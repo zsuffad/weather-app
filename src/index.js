@@ -5,7 +5,7 @@ function getBasePath() {
     const path = window.location.pathname;
 
     // If we're at root or just have a filename, return root
-    if (path === '/' || path.match(/^\/[^\/]*\.(html)$/)) {
+    if (path === '/' || path.match(/^\/[^/]*\.(html)$/)) {
         return '/';
     }
 
@@ -53,8 +53,8 @@ if ('serviceWorker' in navigator) {
 
             const registration = await navigator.serviceWorker.register(swPath, {
                 type: 'module',
-
             });
+            console.log(`registration`, registration);
         } catch (error) {
             console.log('SW registration failed: ', error);
         }

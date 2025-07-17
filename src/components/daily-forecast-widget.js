@@ -376,7 +376,18 @@ export class DailyForecastWidget extends WeatherLitElement {
                             data-direction="back"
                             ?disabled=${this.backButtonDisabled}
                             @click=${this.setNextDay}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#000000"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M15 18l-6-6 6-6" />
+                            </svg>
                         </button>
                         <button
                             class="next-day-forecast-button"
@@ -385,7 +396,18 @@ export class DailyForecastWidget extends WeatherLitElement {
                             data-direction="forward"
                             ?disabled=${this.forwardButtonDisabled}
                             @click=${this.setNextDay}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#000000"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
                         </button>
                     </div>
                 </div>

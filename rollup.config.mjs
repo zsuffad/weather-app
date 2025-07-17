@@ -10,6 +10,7 @@ import livereload from 'rollup-plugin-livereload';
 import { injectManifest } from 'rollup-plugin-workbox';
 import commonjs from '@rollup/plugin-commonjs';
 import { dynamicManifest } from './rollup-plugin-dynamic-manifest.mjs';
+import { string } from 'rollup-plugin-string';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -62,6 +63,10 @@ export default [
       commonjs({
         include: 'node_modules/**',
         strictRequires: 'auto',
+      }),
+
+      string({
+        include: ['node_modules/leaflet/dist/leaflet.css'], // 👈 only Leaflet CSS
       }),
 
       htmlTemplatePlugin(),

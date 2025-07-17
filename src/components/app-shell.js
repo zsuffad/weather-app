@@ -6,6 +6,7 @@ import {BasicWeatherWidget} from './basic-weather-widget.js';
 // import {RainChartWidget} from './rain-chart-widget.js';
 import {DailyForecastWidget} from './daily-forecast-widget.js';
 import {WeeklyForecastWidget} from './weekly-forecast-widget.js';
+import {WeatherMapWidget} from './weather-map-widget.js';
 
 export class AppShell extends WeatherLitElement {
     static get properties() {
@@ -38,6 +39,7 @@ export class AppShell extends WeatherLitElement {
             'basic-weather-widget': BasicWeatherWidget,
             'daily-forecast-widget': DailyForecastWidget,
             'weekly-forecast-widget': WeeklyForecastWidget,
+            'weather-map-widget': WeatherMapWidget,
         };
     }
 
@@ -283,7 +285,19 @@ export class AppShell extends WeatherLitElement {
                         : ''}"
                     placeholder="Enter City Name" />
                 <button class="set-gps-position-button" @click="${this.getLocation}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#000000"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="10" r="3" />
+                        <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
+                    </svg>
                 </button>
 
                 <div class="location-results"></div>
@@ -386,6 +400,10 @@ export class AppShell extends WeatherLitElement {
                               id="weekly-forecast-widget"
                               .currentLocation=${this.currentLocation}
                               .weatherData=${this.weatherData}></weekly-forecast-widget>
+                          <weather-map-widget
+                              class="weather-map"
+                              id="weather-map"
+                              .currentLocation=${this.currentLocation}></weather-map-widget>
                       </main>
                   `
                 : html`
