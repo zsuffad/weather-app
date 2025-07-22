@@ -45,30 +45,6 @@ export class AppShell extends WeatherLitElement {
 
     async connectedCallback() {
         super.connectedCallback();
-
-        // Load font using FontFace API
-        // const font = new FontFace('weathericons', 'url(/font/weathericons-regular-webfont.woff2) format("woff2")');
-
-        // font.load()
-        //     .then((loadedFont) => {
-        //         // Add font to document's FontFaceSet
-        //         document.fonts.add(loadedFont);
-        //         console.log('Font loaded successfully in parent!');
-
-        //         // Dispatch an event to notify children that font is loaded
-        //         this.dispatchEvent(
-        //             new CustomEvent('font-loaded', {
-        //                 bubbles: true,
-        //                 composed: true,
-        //                 detail: {fontFamily: 'weathericons'},
-        //             }),
-        //         );
-
-        //         this.requestUpdate();
-        //     })
-        //     .catch((error) => {
-        //         console.error('Failed to load font:', error);
-        //     });
     }
 
     async updated(_changedProperties) {
