@@ -21,6 +21,8 @@ export class AppShell extends WeatherLitElement {
 
     constructor() {
         super();
+        this.weatherProxyBaseUrl = 'https://weather-app-proxy.zsuffa-david.workers.dev';
+        this.openMeteoApiBaseUrl = `${this.weatherProxyBaseUrl}/v1/forecast`;
         this.currentLocation = JSON.parse(localStorage.getItem('currentLocation')) || {
             country: undefined,
             elevation: undefined,
@@ -144,9 +146,6 @@ export class AppShell extends WeatherLitElement {
      * @returns {string} - The complete URL with query parameters
      */
     buildOpenMeteoUrl(params) {
-        // Start with the base URL
-        const baseUrl = 'https://api.open-meteo.com/v1/forecast';
-
         // Create an array to hold the query parameters
         const queryParams = [];
 
@@ -167,7 +166,7 @@ export class AppShell extends WeatherLitElement {
         }
 
         // Combine the base URL with the query parameters
-        return `${baseUrl}?${queryParams.join('&')}`;
+        return `${this.openMeteoApiBaseUrl}?${queryParams.join('&')}`;
     }
 
     getLocation() {

@@ -22,13 +22,13 @@ export class WeatherMapWidget extends WeatherLitElement {
     constructor() {
         super();
         this.loading = false;
-        this.openweathermap_API_KEY = '57973096dabde2f23889aed21d9f1a6f';
-        this.weatherField = 'precipitationIntensity'; // 'precipitationIntensity'; //'temperature';
+        this.weatherProxyBaseUrl = 'https://weather-app-proxy.zsuffa-david.workers.dev';
+        this.weatherField = 'precipitationIntensity';
         this.zoomLevel = '9';
-        this.timestamp = Math.floor(Date.now() / 1000); //.toISOString();
+        this.timestamp = Math.floor(Date.now() / 1000);
         this.currentLocation = {};
         this.weatherMapImage = null;
-        this.layerOpacity = 0.6;
+        this.layerOpacity = 0.9;
         this.WEATHER_LAYERS = {
             CLOUDS: 'clouds_new',
             PRECIPITATION: 'precipitation_new',
@@ -44,9 +44,7 @@ export class WeatherMapWidget extends WeatherLitElement {
 
     firstUpdated() {
         // Render the chart
-        // this.apiGetWeatherMap();
         this.renderWeatherMap();
-        // this.loading = false;
     }
 
     updated(changedProperties) {
@@ -76,10 +74,17 @@ export class WeatherMapWidget extends WeatherLitElement {
             this.weatherLayer.remove();
         }
 
+        // Naked urls v2 and v1
+        // `http://maps.openweathermap.org/maps/2.0/weather/${this.WEATHER_LAYERS.precipitationIntensity.field}/{z}/{x}/{y}?appid=${this.openweathermap_API_KEY}`, // date=${this.timestamp}&opacity=${this.layerOpacity}&fill_bound=true&
+        // `https://tile.openweathermap.org/map/${this.CURRENT_WEATHER_LAYER}/{z}/{x}/{y}.png?appid=${this.openweathermap_API_KEY}&opacity=${this.layerOpacity}&date=${this.timestamp}`,
+
         // Inject the wether data tile layer
         this.weatherLayer = L.tileLayer(
-            // `http://maps.openweathermap.org/maps/2.0/weather/${this.WEATHER_LAYERS.precipitationIntensity.field}/{z}/{x}/{y}?appid=${this.openweathermap_API_KEY}`, // date=${this.timestamp}&opacity=${this.layerOpacity}&fill_bound=true&
-            `https://tile.openweathermap.org/map/${this.CURRENT_WEATHER_LAYER}/{z}/{x}/{y}.png?appid=${this.openweathermap_API_KEY}&date=${this.timestamp}`,
+            `${this.weatherProxyBaseUrl}/map/${this.CURRENT_WEATHER_LAYER}/{z}/{x}/{y}.png?&opacity=${this.layerOpacity}&date=${this.timestamp}`,
+            {
+                tileSize: 256,
+                crossOrigin: true,
+            }
         ).addTo(this.map);
     }
 
@@ -92,9 +97,8 @@ export class WeatherMapWidget extends WeatherLitElement {
     setDate(changeEvent) {
         console.log(`changeEvent`, changeEvent);
         const value = changeEvent.target.value;
-        const date = new Date();
-        date.setHours(date.getHours() + value); // Assuming each step is 1 hour
-        this.timestamp = Math.floor(date.getTime() / 1000); // Convert to UNIX timestamp
+        const now = Date.now();
+        this.timestamp = Math.floor(now / 1000) + 3600 * value;
         this.updateWeatherLayer();
     }
 
