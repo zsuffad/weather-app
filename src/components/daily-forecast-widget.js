@@ -142,7 +142,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                     type: 'line',
                     parentHeightOffset: 0,
                     sparkline: {
-                        enabled: true,
+                        enabled: false,
                     },
                     toolbar: {
                         show: false,
@@ -205,26 +205,19 @@ export class DailyForecastWidget extends WeatherLitElement {
                             fontWeight: 400,
                             cssClass: 'apexcharts-xaxis-label',
                         },
+                        offsetX: -7,
                         formatter: (value) => {
                             return value + 'h';
                         },
                     },
                 },
                 yaxis: {
+                    show: false,
                     min: minTemp > 0 ? 0 : minTemp - 10,
                     max: maxTemp + 10,
                     stepSize: 10,
                     labels: {
-                        style: {
-                            colors: [],
-                            fontSize: '12px',
-                            fontFamily: 'Helvetica, Arial, sans-serif',
-                            fontWeight: 400,
-                            cssClass: 'apexcharts-yaxis-label',
-                        },
-                        formatter: (value) => {
-                            return Number(value).toFixed(0);
-                        },
+                        show: false,
                     },
                 },
                 tooltip: {
@@ -246,7 +239,7 @@ export class DailyForecastWidget extends WeatherLitElement {
                     },
                     padding: {
                         top: 0,
-                        right: 10,
+                        right: 0,
                         bottom: 0,
                         left: 10,
                     },

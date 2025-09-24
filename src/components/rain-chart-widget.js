@@ -183,7 +183,7 @@ export class RainChartWidget extends WeatherLitElement {
                     },
                     padding: {
                         top: 0,
-                        right: 10,
+                        right: 17,
                         bottom: 0,
                         left: 10,
                     },
@@ -301,6 +301,7 @@ export class RainChartWidget extends WeatherLitElement {
                     },
                 },
                 yaxis: {
+                    show: false,
                     min: 0,
                     max: 100,
                     stepSize: 10,
@@ -336,7 +337,7 @@ export class RainChartWidget extends WeatherLitElement {
                     },
                     padding: {
                         top: 0,
-                        right: 10,
+                        right: 17,
                         bottom: 0,
                         left: 10,
                     },
