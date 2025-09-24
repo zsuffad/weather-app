@@ -98,6 +98,7 @@ export class DailyForecastWidget extends WeatherLitElement {
 
             const dailyData = [];
             // Get one day data and get every 3 hour data
+            // @TODO: make an average of the 3 numbers
             for (let i = from; i < to; i += 3) {
                 dailyData.push({
                     time: this.weatherData.hourly.time[i],
@@ -131,6 +132,8 @@ export class DailyForecastWidget extends WeatherLitElement {
                 weatherCode.push(this.getWeatherIcon(forecast.weatherCode));
             });
 
+            // @TODO: make it more dynamic min-10 max+10 or
+            // min=0 max=50 but if min < 0 min=-20 if max > 50 max = 60
             const minTemp = Math.min(...temp);
             const maxTemp = Math.max(...temp);
 

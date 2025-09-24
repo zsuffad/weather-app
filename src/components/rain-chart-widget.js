@@ -86,7 +86,7 @@ export class RainChartWidget extends WeatherLitElement {
                 rain.push(Number(forecast.rain));
             });
 
-            var options = {
+            // @TODO: create a default options object
                 chart: {
                     type: 'bar',
                     height: '30px',
@@ -237,6 +237,7 @@ export class RainChartWidget extends WeatherLitElement {
                 precipitation_probability.push(Number(forecast.precipitation_probability));
             });
 
+            // @TODO: create a default options object
             var options = {
                 chart: {
                     type: 'bar',

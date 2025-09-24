@@ -87,7 +87,7 @@ export class AppShell extends WeatherLitElement {
         const latitude = this.currentLocation.latitude;
         const longitude = this.currentLocation.longitude;
 
-        // Object containing url parameters
+        // Object containing url parameters sent to the API
         const urlParams = {
             latitude: latitude,
             longitude: longitude,
@@ -135,6 +135,7 @@ export class AppShell extends WeatherLitElement {
                 if (!response.ok) throw new Error('API request failed');
                 return response.json();
             } catch (error) {
+                // @TODO: add real notification here.
                 console.log('Error fetching weather data:', error);
             }
         }
@@ -149,7 +150,6 @@ export class AppShell extends WeatherLitElement {
         // Create an array to hold the query parameters
         const queryParams = [];
 
-        // Process each parameter
         for (const [key, value] of Object.entries(params)) {
             // Handle arrays like hourly and daily parameters
             if (Array.isArray(value)) {
@@ -187,6 +187,7 @@ export class AppShell extends WeatherLitElement {
                 console.log(e);
             }
         } else {
+            // @TODO: use notification here too
             alert("Your browser doesn't support geolocation. Enter your location city manually");
             return false;
         }
@@ -216,6 +217,7 @@ export class AppShell extends WeatherLitElement {
                     `);
                 });
                 const resultsList = this._('.location-results');
+                // @TODO: make this a property
                 resultsList.classList.add('enabled');
                 render(locationList, resultsList);
             }
@@ -240,6 +242,7 @@ export class AppShell extends WeatherLitElement {
         localStorage.setItem('currentLocation', JSON.stringify(this.currentLocation));
 
         const resultsList = this._('.location-results');
+        // @TODO: make this a property
         resultsList.classList.remove('enabled');
     }
 
