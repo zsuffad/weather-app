@@ -59,17 +59,19 @@ export class RainChartWidget extends WeatherLitElement {
         to = to > lastIndex ? lastIndex : to;
         // @TODO put this into a function END
 
-        let rain_avg = 0;
+        // let rain_avg = 0;
+        let rain_max = 0;
         for (let i = from; i < to; i += 1) {
-            rain_avg += this.weatherData.hourly.rain[i];
+            rain_max = this.weatherData.hourly.rain[i] > rain_max
+                ? this.weatherData.hourly.rain[i]
+                : rain_max;
 
             if (i % 3 === 0) {
-                rain_avg = rain_avg / 3;
                 rainData.push({
                     time: this.weatherData.hourly.time[i],
-                    rain: this.weatherData.hourly.rain[i],
+                    rain: rain_max,
                 });
-                rain_avg = 0;
+                rain_max = 0;
             }
         }
         const chartElement = this._('#rain-chart');
@@ -86,7 +88,11 @@ export class RainChartWidget extends WeatherLitElement {
                 rain.push(Number(forecast.rain));
             });
 
+
+            let maxRainValue = Math.max(...rain) * 1.2;
+
             // @TODO: create a default options object
+            let options = {
                 chart: {
                     type: 'bar',
                     height: '30px',
@@ -121,7 +127,7 @@ export class RainChartWidget extends WeatherLitElement {
                         fontSize: '20px',
                         fontFamily: 'Helvetica, Arial, sans-serif',
                         fontWeight: 'bold',
-                        colors: ['#666666'],
+                        colors: ['#AAA'],
                     },
                     background: {
                         enabled: false,
@@ -148,9 +154,10 @@ export class RainChartWidget extends WeatherLitElement {
                     },
                 },
                 yaxis: {
+                    show: false,
                     min: 0,
-                    max: 100,
-                    stepSize: 10,
+                    max: maxRainValue,
+                    // stepSize: 0.1,
                     labels: {
                         style: {
                             colors: [],
@@ -257,11 +264,11 @@ export class RainChartWidget extends WeatherLitElement {
                     {
                         name: 'rain %',
                         data: precipitation_probability,
-                        color: '#392bcf',
+                        color: '#191919',
                     },
                 ],
                 dataLabels: {
-                    enabled: true,
+                    enabled: false,
                     enabledOnSeries: [0, 1],
                     formatter: function (val, opts) {
                         return Math.round(val);
@@ -274,7 +281,7 @@ export class RainChartWidget extends WeatherLitElement {
                         fontSize: '20px',
                         fontFamily: 'Helvetica, Arial, sans-serif',
                         fontWeight: 'bold',
-                        colors: ['#666666'],
+                        colors: ['#AAAAAA'],
                     },
                     background: {
                         enabled: false,
